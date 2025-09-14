@@ -1,5 +1,11 @@
+import { motion } from "framer-motion";
 import { MoveRight } from 'lucide-react';
 import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
+
+const fadeIn = {
+  hidden: { opacity: 0, y: 16 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
 
 const highlights = [
   {
@@ -41,9 +47,15 @@ const About = () => {
       {/* Header Grid  */}
       <div className="container mx-auto px-4">
         <div className="mb-16 text-center">
-          <h2 className="text-4xl font-bold pb-1 bg-gradient-to-r from-green-700 via-emerald-600 to-green-500 bg-clip-text text-transparent ">Community Highlights</h2>
+          <motion.h2 variants={fadeIn}
+            initial="hidden"
+            animate="show"
+            className="text-4xl font-bold pb-1 bg-gradient-to-r from-green-700 via-emerald-600 to-green-500 bg-clip-text text-transparent" >Community Highlights</motion.h2>
 
-          <p className="text-lg md:text-xl text-gray-600">Discover the endless possibilities within TechTribe's vibrant ecosystem</p>
+          <motion.p variants={fadeIn}
+            initial="hidden"
+            animate="show"
+            className="text-lg md:text-xl text-gray-600">Discover the endless possibilities within TechTribe's vibrant ecosystem</motion.p>
         </div>
 
         {/* Highlights  */}
@@ -77,7 +89,7 @@ const About = () => {
 
         <div className="mt-20 text-center">
           <button className="inline-flex items-center bg-gradient-to-r from-green-600 to-emerald-600 font-semibold rounded-full shadow-lg px-8 py-4 text-white hover:shadow-xl transform hover:scale-105 transition-all duration-300">Join Our Community
-            <MoveRight className='ml-2 text-lg'/>
+            <MoveRight className='ml-2 text-lg' />
           </button>
 
         </div>
