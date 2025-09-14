@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import type { Variants, Transition } from "framer-motion"
+import { ChevronRight, ChevronLeft } from 'lucide-react';
 
 
 const testimonials = [
@@ -182,7 +183,7 @@ const Members = () => {
                shadow hover:bg-green-50 hover:shadow-lg 
                transition-all duration-300 text-green-700"
         >
-          ◀
+          <ChevronLeft/>
         </button>
         <button
           onClick={() => swipeToTestimonial(1)}
@@ -190,7 +191,7 @@ const Members = () => {
                shadow hover:bg-green-50 hover:shadow-lg 
                transition-all duration-300 text-green-700"
         >
-          ▶
+         <ChevronRight/>
         </button>
       </div>
     </section>
