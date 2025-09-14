@@ -8,7 +8,7 @@ const fadeIn = {
 
 const Hero = () => {
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative overflow-hidden border-b border-gray-200 ">
       {/* Background Blurs */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden>
         <div className="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-green-300/30 blur-3xl" />
@@ -27,9 +27,15 @@ const Hero = () => {
             variants={fadeIn}
             className="text-4xl md:text-6xl font-extrabold tracking-tight text-gray-900"
           >
-            Uniting Coders, Building Futures
+            Welcome to <span className="text-green-600">TechTribe</span>
           </motion.h1>
 
+          <motion.p
+            variants={fadeIn}
+            className="mt-6 text-sm md:text-sm text-gray-600 max-w-2xl mx-auto"
+          >
+            Connect, Collaborate and Code
+          </motion.p>
           <motion.p
             variants={fadeIn}
             className="mt-6 text-lg md:text-xl text-gray-600 max-w-2xl mx-auto"
