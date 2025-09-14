@@ -27,7 +27,7 @@ const Hero = () => {
             variants={fadeIn}
             className="text-4xl md:text-6xl font-extrabold tracking-tight text-gray-900"
           >
-            Welcome to <span className="text-green-600">TechTribe</span>
+            Welcome to <span className="bg-gradient-to-r from-green-700 via-emerald-600 to-green-500 bg-clip-text text-transparent">TechTribe</span>
           </motion.h1>
 
           <motion.p
@@ -56,9 +56,9 @@ const Hero = () => {
             </a>
             <a
               href="#projects"
-              className="rounded-xl px-6 py-3 font-medium border border-gray-300 hover:border-green-600 hover:text-green-700 transition-colors"
+              className="rounded-xl px-6 py-3 font-medium border border-gray-300 hover:border-green-600 hover:text-green-700 hover:bg-green-50 transition-colors"
             >
-              Explore Projects
+              Explore
             </a>
           </motion.div>
         </motion.div>
