@@ -1,6 +1,16 @@
 import { useState } from "react"
 import { Menu, X } from "lucide-react"
 import { Button } from "../ui/button"
+import { motion } from "framer-motion"
+
+const fadeInLeft = {
+  hidden: { opacity: 0, x: -16 },
+  show: { opacity: 1, x: 0, transition: { duration: 0.5 } },
+};
+const fadeInRight = {
+  hidden: { opacity: 0, x: 16 },
+  show: { opacity: 1, x: 0, transition: { duration: 0.5 } },
+};
 
 const Navbar = () => {
 
@@ -16,23 +26,36 @@ const Navbar = () => {
     <div className="w-full border-b border-gray-200 bg-white sticky top-0 z-50 shadow-b shadow-green-300/30">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-5 sm:px-6 lg:px-8">
         {/* Logo */}
-        <a href="/" className="text-3xl font-bold text-green-600">
+        <motion.a href="/"
+          variants={fadeInLeft}
+          initial="hidden"
+          animate="show"
+          className="text-3xl font-bold text-green-600">
           {`</>`} TechTribe
-        </a>
+        </motion.a>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex justify-center items-center gap-8">
+        <motion.div className="hidden md:flex justify-center items-center gap-8">
           {navLinks.map((link) => (
-            <a
+            <motion.a
+              variants={fadeInRight}
+              initial="hidden"
+              animate="show"
               key={link.name}
               href={link.href}
               className="text-gray-700 hover:text-green-600 transition-colors"
             >
               {link.name}
-            </a>
+            </motion.a>
           ))}
-          <div className="hidden md:flex">
-            <Button className=" bg-green-600
+          <motion.div 
+           variants={fadeInRight}
+              initial="hidden"
+              animate="show"
+          className="hidden md:flex">
+            <Button 
+            
+            className=" bg-green-600
               rounded-2xl 
               px-6 py-2 
               text-white 
@@ -44,8 +67,8 @@ const Navbar = () => {
               hover:inset-ring-2
               hover:inset-ring-green-600 
               hover:shadow-green/50  hover:shadow-lg cursor-pointer">Join Us</Button>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         {/* Mobile Menu Button */}
         <button
@@ -62,10 +85,14 @@ const Navbar = () => {
         <div className="md:hidden bg-white border-t boder-gray-200">
           <div className="flex flex-col px-4 py-3 space-y-2">
             {navLinks.map((link) => (
-              <a href={link.href}
+              <motion.a
+                variants={fadeInRight}
+                initial="hidden"
+                animate="show"
+                href={link.href}
                 key={link.name}
                 className="text-gray-700 hover:text-green-600 transition-colors"
-              >{link.name}</a>
+              >{link.name}</motion.a>
             ))}
             <Button variant="outline" className="w-full">Join Us</Button>
           </div>
