@@ -1,7 +1,7 @@
 
 import { motion } from "framer-motion";
 
-const fadeIn = {
+const fadeInUp = {
   hidden: { opacity: 0, y: 16 },
   show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
@@ -24,20 +24,20 @@ const Hero = () => {
           className="text-center"
         >
           <motion.h1
-            variants={fadeIn}
+            variants={fadeInUp}
             className="text-4xl md:text-6xl font-extrabold tracking-tight text-gray-900"
           >
             Welcome to <span className="bg-gradient-to-r from-green-700 via-emerald-600 to-green-500 bg-clip-text text-transparent">TechTribe</span>
           </motion.h1>
 
           <motion.p
-            variants={fadeIn}
+            variants={fadeInUp}
             className="mt-6 text-sm md:text-sm text-gray-600 max-w-2xl mx-auto"
           >
             Connect, Collaborate and Code
           </motion.p>
           <motion.p
-            variants={fadeIn}
+            variants={fadeInUp}
             className="mt-6 text-lg md:text-xl text-gray-600 max-w-2xl mx-auto"
           >
             TechTribe is a community of builders, mentors, and learners. We ship
@@ -45,7 +45,7 @@ const Hero = () => {
           </motion.p>
 
           <motion.div
-            variants={fadeIn}
+            variants={fadeInUp}
             className="mt-10 flex items-center justify-center gap-4"
           >
             <a
