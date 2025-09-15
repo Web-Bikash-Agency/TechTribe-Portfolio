@@ -7,7 +7,7 @@ const fadeIn = {
   show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
-const highlights = [
+const about = [
   {
     icon: "👥",
     title: "Hackathons",
@@ -41,7 +41,7 @@ const highlights = [
 const About = () => {
   return (
     <section className="min-h-screen py-12 bg-gray-50 border-b border-gray-200"
-      id="highlights"
+      id="about"
     >
 
       {/* Header Grid  */}
@@ -50,7 +50,7 @@ const About = () => {
           <motion.h2 variants={fadeIn}
             initial="hidden"
             animate="show"
-            className="text-4xl font-bold pb-1 bg-gradient-to-r from-green-700 via-emerald-600 to-green-500 bg-clip-text text-transparent" >Community Highlights</motion.h2>
+            className="text-4xl font-bold pb-1 bg-gradient-to-r from-green-700 via-emerald-600 to-green-500 bg-clip-text text-transparent" >About Our Community</motion.h2>
 
           <motion.p variants={fadeIn}
             initial="hidden"
@@ -58,30 +58,30 @@ const About = () => {
             className="text-lg md:text-xl text-gray-600">Discover the endless possibilities within TechTribe's vibrant ecosystem</motion.p>
         </div>
 
-        {/* Highlights  */}
+        {/* about  */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {highlights.map((highlights, idx) => (
+          {about.map((about, idx) => (
             <div key={idx}>
-              <Card className={`relative overflow-hidden rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500  border-0 ${highlights.bgColor} cursor-pointer group`}>
+              <Card className={`relative overflow-hidden rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500  border-0 ${about.bgColor} cursor-pointer group`}>
 
                 {/* Gradient Overlay on hover*/}
                 <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                 <CardHeader className="relative flex flex-col items-center z-10 space-y-6 p-0">
                   <div className="relative">
-                    <div className={`absolute inset-0 bg-gradient-to-r ${highlights.color} rounded-full blur-lg opacity-30 group-hover:opacity-50 transition-opacity duration-500 `} />
-                    <div className="relative text-6xl mb-2 filter drop-shadow-sm">{highlights.icon}</div>
+                    <div className={`absolute inset-0 bg-gradient-to-r ${about.color} rounded-full blur-lg opacity-30 group-hover:opacity-50 transition-opacity duration-500 `} />
+                    <div className="relative text-6xl mb-2 filter drop-shadow-sm">{about.icon}</div>
                   </div>
 
-                  <CardTitle className={`text-xl font-bold bg-gradient-to-r ${highlights.color} bg-clip-text text-transparent text-center`}>
-                    {highlights.title}
+                  <CardTitle className={`text-xl font-bold bg-gradient-to-r ${about.color} bg-clip-text text-transparent text-center`}>
+                    {about.title}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="mt-6 text-gray-700 text-sm text-center relative z-10 leading-relaxed">
-                  {highlights.desc}
+                  {about.desc}
                 </CardContent>
 
-                <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${highlights.color} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out`} />
+                <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${about.color} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out`} />
               </Card>
             </div>
           ))}
