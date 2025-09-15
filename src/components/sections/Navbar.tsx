@@ -1,4 +1,4 @@
-import { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Menu, X } from "lucide-react"
 import { Button } from "../ui/button"
 import { motion } from "framer-motion"
@@ -12,24 +12,55 @@ const fadeInRight = {
   show: { opacity: 1, x: 0, transition: { duration: 0.5 } },
 };
 
+
+
 const Navbar = () => {
 
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
+
   const navLinks = [
-    { name: "Home", href: "/" },
+    { name: "Home", href: "#home" },
     { name: "About", href: "#about" },
     { name: "Members", href: "#members" }
   ]
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+  const scrollToSection = (href: string) => {
+    
+    if (href === "/" || href === "#home"){
+      window.scrollTo({top: 0, behavior: "smooth"});
+      setIsOpen(false);
+      return;
+    }
 
-  const [isOpen, setIsOpen] = useState(false)
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+    setIsOpen(false);
+  };
+
+  const handleLinkClick = (e:React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    scrollToSection(href);
+  }
 
   return (
-    <div className="w-full border-b border-gray-200 bg-white sticky top-0 z-50 shadow-b shadow-green-300/30">
+    <div className={`w-full border-b border-gray-200 bg-white sticky top-0 z-50 shadow-b shadow-green-300/30 ${
+        isScrolled ? "shadow-md shadow-green-300/30" : ""}`}>
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-5 sm:px-6 lg:px-8">
         {/* Logo */}
         <motion.a href="/"
           variants={fadeInLeft}
           initial="hidden"
           animate="show"
+          onClick={(e) => handleLinkClick(e, "#home")}
           className="text-3xl font-bold text-green-600">
           {`</>`} TechTribe
         </motion.a>
@@ -43,19 +74,20 @@ const Navbar = () => {
               animate="show"
               key={link.name}
               href={link.href}
+              onClick={(e) => handleLinkClick(e, link.href)}
               className="text-gray-700 hover:text-green-600 transition-colors"
             >
               {link.name}
             </motion.a>
           ))}
-          <motion.div 
-           variants={fadeInRight}
-              initial="hidden"
-              animate="show"
-          className="hidden md:flex">
-            <Button 
-            
-            className=" bg-green-600
+          <motion.div
+            variants={fadeInRight}
+            initial="hidden"
+            animate="show"
+            className="hidden md:flex">
+            <Button
+
+              className=" bg-green-600
               rounded-2xl 
               px-6 py-2 
               text-white 
@@ -74,6 +106,7 @@ const Navbar = () => {
         <button
           className="md:hidden"
           onClick={() => setIsOpen(!isOpen)}
+          
           aria-label="Toggle Menu"
         >
           {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -91,6 +124,7 @@ const Navbar = () => {
                 animate="show"
                 href={link.href}
                 key={link.name}
+                onClick={(e) => handleLinkClick(e, link.href)}
                 className="text-gray-700 hover:text-green-600 transition-colors"
               >{link.name}</motion.a>
             ))}
