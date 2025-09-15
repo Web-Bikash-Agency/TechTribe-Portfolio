@@ -1,4 +1,4 @@
-
+import { BackgroundBeamsWithCollision } from "../../animation/BackgroundBeamsWithCollision"
 import { motion } from "framer-motion";
 
 const fadeInUp = {
@@ -8,7 +8,9 @@ const fadeInUp = {
 
 const Hero = () => {
   return (
-    <section className="relative overflow-hidden border-b border-gray-200 ">
+
+
+    <BackgroundBeamsWithCollision className="relative overflow-hidden border-b border-gray-200">
       {/* Background Blurs */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden>
         <div className="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-green-300/30 blur-3xl" />
@@ -63,7 +65,8 @@ const Hero = () => {
           </motion.div>
         </motion.div>
       </div>
-    </section>
+    </BackgroundBeamsWithCollision>
+
   );
 }
 
