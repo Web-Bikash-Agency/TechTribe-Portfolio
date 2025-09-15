@@ -1,4 +1,5 @@
 import { BackgroundBeamsWithCollision } from "../../animation/BackgroundBeamsWithCollision"
+// import { BackgroundLines } from "../../animation/BackgroundLines"
 import { motion } from "framer-motion";
 
 const fadeInUp = {
@@ -8,8 +9,6 @@ const fadeInUp = {
 
 const Hero = () => {
   return (
-
-
     <BackgroundBeamsWithCollision className="relative overflow-hidden border-b border-gray-200">
       {/* Background Blurs */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden>
@@ -58,7 +57,7 @@ const Hero = () => {
             </a>
             <a
               href="#projects"
-              className="rounded-xl px-6 py-3 font-medium border border-gray-300 hover:border-green-600 hover:text-green-700 hover:bg-green-50 transition-colors"
+              className="rounded-xl px-6 py-3 font-medium border text-gray-800 border-gray-800 hover:border-green-600 hover:text-green-700 hover:bg-green-50 transition-colors"
             >
               Explore
             </a>
