@@ -10,7 +10,7 @@ const testimonials = [
     role: "Frontend Developer",
     company: "TechCorp",
     image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face",
-    desc: "TechTribe helped me find a supportive community where I grew my skills and confidence as a developer. The mentorship I received was invaluable.",
+    desc: "Alice is skilled in building responsive and interactive web interfaces using React and modern CSS frameworks. She specializes in creating smooth user experiences with a strong eye for detail.",
     rating: 5,
   },
   {
@@ -18,7 +18,7 @@ const testimonials = [
     role: "Backend Engineer",
     company: "StartupFlow",
     image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
-    desc: "I collaborated on exciting projects and made great friends along the way. The open-source contributions helped me land my dream job.",
+    desc: "Ravi has expertise in Node.js and database management, focusing on scalable and secure backend systems. He’s passionate about APIs, microservices, and optimizing server performance.",
     rating: 5,
   },
   {
@@ -26,7 +26,7 @@ const testimonials = [
     role: "UI/UX Designer",
     company: "DesignStudio",
     image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&h=150&fit=crop&crop=face",
-    desc: "The shared learning resources and mentorship opportunities boosted my career growth. I've learned more here than in any formal course.",
+    desc: "Sophia is a creative designer with strong skills in wireframing, prototyping, and user research. She excels at crafting visually appealing designs that balance aesthetics with usability.",
     rating: 5,
   },
 ];
@@ -34,7 +34,7 @@ const testimonials = [
 // Generic transition for smooth animations
 const smoothTransition: Transition = {
   duration: 0.7,
-  ease: "easeInOut", // ✅ valid, no TS error
+  ease: "easeInOut",
 };
 
 // Parent container
@@ -107,7 +107,7 @@ const Members = () => {
   return (
     <section
       id="members"
-      className="py-20 md:py-28 bg-gradient-to-br from-slate-50 via-green-50 to-green-100 relative overflow-hidden"
+      className="py-20 md:py-28 bg-gradient-to-br from-slate-50 via-green-50 to-green-100 relative"
     >
       {/* Heading */}
       <motion.div
@@ -123,7 +123,7 @@ const Members = () => {
              bg-gradient-to-r from-green-700 via-emerald-600 to-green-500 
              bg-clip-text text-transparent"
         >
-          What Our Members Say
+          Core Team Members
         </motion.h2>
         <motion.p
           variants={itemVariants}
@@ -135,7 +135,7 @@ const Members = () => {
       </motion.div>
 
       {/* Carousel */}
-      <div className="relative h-[450px]">
+      <div className="relative flex items-start justify-center">
         <AnimatePresence initial={false} custom={direction} mode="wait">
           <motion.div
             key={current}
@@ -144,7 +144,7 @@ const Members = () => {
             initial="enter"
             animate="center"
             exit="exit"
-            className="absolute inset-0 flex items-center justify-center"
+            className="flex items-center justify-center"
             onMouseEnter={() => setIsAutoPlaying(false)}
             onMouseLeave={() => setIsAutoPlaying(true)}
           >
@@ -176,7 +176,7 @@ const Members = () => {
       </div>
 
       {/* Controls */}
-      <div className="flex justify-center mt-6 space-x-6">
+      <div className="flex justify-center mt-8 space-x-6">
         <button
           onClick={() => swipeToTestimonial(-1)}
           className="p-3 rounded-full bg-white border border-green-300 
