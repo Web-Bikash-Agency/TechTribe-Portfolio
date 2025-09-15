@@ -128,7 +128,7 @@ const Navbar = () => {
                 className="text-gray-700 hover:text-green-600 transition-colors"
               >{link.name}</motion.a>
             ))}
-            <Button variant="outline" className="w-full">Join Us</Button>
+            <Button className="w-full bg-green-600 hover:bg-white hover:text-green-500 hover:inset-ring-2 hover:inset-ring-green-600">Join Us</Button>
           </div>
         </div>
       )}
