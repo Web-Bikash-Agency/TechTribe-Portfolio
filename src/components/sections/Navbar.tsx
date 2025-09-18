@@ -17,6 +17,7 @@ const Navbar = () => {
     { name: "Home", href: "#home" },
     { name: "About", href: "#about" },
     { name: "Members", href: "#members" },
+    { name: "Events", href: "#events" },
   ];
 
   const [isOpen, setIsOpen] = useState(false);
