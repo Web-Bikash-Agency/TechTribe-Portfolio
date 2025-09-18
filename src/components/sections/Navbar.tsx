@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
-import { Button } from "../ui/button";
-import { motion } from "framer-motion";
+import { useState } from "react"
+import { Menu, X } from "lucide-react"
+import { Button } from "../ui/button"
+import { motion } from "framer-motion"
 
 const fadeInLeft = {
   hidden: { opacity: 0, x: -16 },
@@ -20,28 +20,7 @@ const Navbar = () => {
     { name: "Events", href: "#events" },
   ];
 
-  const [isOpen, setIsOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 0);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const handleLinkClick = (
-    e: React.MouseEvent<HTMLAnchorElement>,
-    href: string
-  ) => {
-    e.preventDefault();
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-      setIsOpen(false);
-    }
-  };
+  const [isOpen, setIsOpen] = useState(false)
 
   return (
     <div
@@ -56,8 +35,7 @@ const Navbar = () => {
           variants={fadeInLeft}
           initial="hidden"
           animate="show"
-          className="text-3xl font-bold text-green-600"
-        >
+          className="text-3xl font-bold text-green-600">
           {`</>`} TechTribe
         </motion.a>
 
