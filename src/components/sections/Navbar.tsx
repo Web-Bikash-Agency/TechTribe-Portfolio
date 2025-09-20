@@ -21,7 +21,7 @@ const Navbar = () => {
 
   const navLinks = [
     { name: "Home", href: "#home" },
-    { name: "About", href: "#about" },
+    { name: "Highlights", href: "#highlights" },
     { name: "Members", href: "#members" }
   ]
   useEffect(() => {
