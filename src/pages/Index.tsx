@@ -1,7 +1,7 @@
 
 import Navbar from "../components/sections/Navbar"
 import Hero from "../components/sections/Hero"
-import About from "../components/sections/About"
+import About from "../components/sections/Highlights"
 import Footer from "../components/sections/Footer"
 import Members from "../components/sections/Members"
 
