@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import type { Variants, Transition } from "framer-motion"
-import { ChevronRight, ChevronLeft } from 'lucide-react';
+
+import { ChevronLeft } from "../../motion/ChevronLeft";
+import { ChevronRight } from "../../motion/ChevronRight ";
 
 
 const testimonials = [
