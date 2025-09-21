@@ -64,12 +64,14 @@ const Highlights = () => {
         <div className="mb-16 text-center">
           <motion.h2 variants={fadeIn}
             initial="hidden"
-            animate="show"
+            whileInView="show"
+  viewport={{ once: true }}
             className="text-4xl font-bold pb-1 bg-gradient-to-r from-green-700 via-emerald-600 to-green-500 bg-clip-text text-transparent" >Community Highlights</motion.h2>
 
           <motion.p variants={fadeIn}
             initial="hidden"
-            animate="show"
+             whileInView="show"
+  viewport={{ once: true }}
             className="text-lg md:text-xl text-gray-600 mt-3">Discover the many ways TechTribe empowers developers to learn, grow, and make a difference</motion.p>
         </div>
 
@@ -103,7 +105,7 @@ const Highlights = () => {
         </div>
 
         <div className="mt-20 flex justify-center">
-  <button className="group inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-emerald-500 to-green-600 px-10 py-4 text-white font-semibold shadow-lg hover:shadow-emerald-400/40 transition-all duration-300 hover:scale-105">
+  <button className="group inline-flex items-center gap-3 rounded-full border border-green-300 text-green-500 bg-green-50 px-7 py-4">
     <span>Join any or all of these activities — there’s something for everyone!</span>
     <Rocket className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
   </button>
