@@ -146,7 +146,7 @@ const Hero = () => {
                     ease: [0.25, 0.1, 0.25, 1]
                   }}
                 >
-                  <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight text-gray-900 text-center">
+                  <h1 className="text-6xl sm:text-7xl md:text-8xl font-extrabold tracking-tight text-gray-900 text-center">
                     <TypewriterEffect words={words} />
                   </h1>
                 </motion.div>
@@ -172,7 +172,7 @@ const Hero = () => {
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.6 }}
-                  className="text-sm md:text-sm text-gray-600 font-medium tracking-wide mb-4"
+                  className="text-xs sm:text-sm md:text-base text-gray-600 font-medium tracking-wide mb-4"
                 >
                   Connect, Collaborate and Code
                 </motion.p>
