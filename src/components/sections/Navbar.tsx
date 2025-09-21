@@ -19,8 +19,11 @@ const Navbar = () => {
     { name: "Members", href: "#members" },
     { name: "Events", href: "#events" },
   ];
+<<<<<<< HEAD
     { name: "Members", href: "#members" },
   ];
+=======
+>>>>>>> 4dbb8a6ceeee978e119d0ef4ecf7b40d601114b3
 
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -51,11 +54,14 @@ const Navbar = () => {
         isScrolled ? "shadow-md shadow-green-300/30" : ""
       }`}
     >
+<<<<<<< HEAD
     <div
       className={`w-full border-b border-gray-200 bg-white sticky top-0 z-50 shadow-b shadow-green-300/30 ${
         isScrolled ? "shadow-md shadow-green-300/30" : ""
       }`}
     >
+=======
+>>>>>>> 4dbb8a6ceeee978e119d0ef4ecf7b40d601114b3
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-5 sm:px-6 lg:px-8">
         {/* Logo */}
         <motion.a
@@ -89,6 +95,7 @@ const Navbar = () => {
             animate="show"
             className="hidden md:flex"
           >
+<<<<<<< HEAD
             <Button
               className=" bg-green-600
           <motion.div
@@ -97,6 +104,8 @@ const Navbar = () => {
             animate="show"
             className="hidden md:flex"
           >
+=======
+>>>>>>> 4dbb8a6ceeee978e119d0ef4ecf7b40d601114b3
             <Button
               className=" bg-green-600
               rounded-2xl 
@@ -146,9 +155,12 @@ const Navbar = () => {
             <Button variant="outline" className="w-full">
               Join Us
             </Button>
+<<<<<<< HEAD
             <Button variant="outline" className="w-full">
               Join Us
             </Button>
+=======
+>>>>>>> 4dbb8a6ceeee978e119d0ef4ecf7b40d601114b3
           </div>
         </div>
       )}
