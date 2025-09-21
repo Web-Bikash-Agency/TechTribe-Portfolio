@@ -60,7 +60,7 @@ export default function Footer() {
               <li><a href="#" className="hover:text-yellow-500 transition">Documentation</a></li>
               <li><a href="#" className="hover:text-yellow-500 transition">Tutorials</a></li>
               <li><a href="#" className="hover:text-yellow-500 transition">Roadmaps</a></li>
-              <li><a href="#" className="hover:text-yellow-500 transition">Workshops</a></li>
+              <li><a href="#events" className="hover:text-yellow-500 transition">Events and Workshops</a></li>
             </ul>
           </div>
 

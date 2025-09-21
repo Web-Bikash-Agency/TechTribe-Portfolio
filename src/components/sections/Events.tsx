@@ -268,11 +268,11 @@ const Events = () => {
           >
             {/* Close button */}
             <button
-              onClick={() => setPreviewImage(null)}
-              className="absolute -top-3 -right-3 bg-gray-800 text-white rounded-full shadow-lg p-2 hover:bg-red-600 transition-colors"
-            >
-              ✕
-            </button>
+  onClick={() => setPreviewImage(null)}
+  className="absolute -top-3 -right-3 bg-gray-800 text-white rounded-full shadow-lg p-2 hover:bg-red-600 transition-colors"
+>
+  ✕
+</button>
 
             {/* Poster image */}
             <img
