@@ -1,7 +1,7 @@
-import { useState } from "react"
-import { Menu, X } from "lucide-react"
-import { Button } from "../ui/button"
-import { motion } from "framer-motion"
+import { useState, useEffect } from "react";
+import { Menu, X } from "lucide-react";
+import { Button } from "../ui/button";
+import { motion } from "framer-motion";
 
 const fadeInLeft = {
   hidden: { opacity: 0, x: -16 },
@@ -19,10 +19,38 @@ const Navbar = () => {
     { name: "Members", href: "#members" },
     { name: "Events", href: "#events" },
   ];
+    { name: "Members", href: "#members" },
+  ];
 
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const handleLinkClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
+    e.preventDefault();
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+      setIsOpen(false);
+    }
+  };
 
   return (
+    <div
+      className={`w-full border-b border-gray-200 bg-white sticky top-0 z-50 shadow-b shadow-green-300/30 ${
+        isScrolled ? "shadow-md shadow-green-300/30" : ""
+      }`}
+    >
     <div
       className={`w-full border-b border-gray-200 bg-white sticky top-0 z-50 shadow-b shadow-green-300/30 ${
         isScrolled ? "shadow-md shadow-green-300/30" : ""
@@ -35,7 +63,8 @@ const Navbar = () => {
           variants={fadeInLeft}
           initial="hidden"
           animate="show"
-          className="text-3xl font-bold text-green-600">
+          className="text-3xl font-bold text-green-600"
+        >
           {`</>`} TechTribe
         </motion.a>
 
@@ -54,6 +83,14 @@ const Navbar = () => {
               {link.name}
             </motion.a>
           ))}
+          <motion.div
+            variants={fadeInRight}
+            initial="hidden"
+            animate="show"
+            className="hidden md:flex"
+          >
+            <Button
+              className=" bg-green-600
           <motion.div
             variants={fadeInRight}
             initial="hidden"
@@ -106,6 +143,9 @@ const Navbar = () => {
                 {link.name}
               </motion.a>
             ))}
+            <Button variant="outline" className="w-full">
+              Join Us
+            </Button>
             <Button variant="outline" className="w-full">
               Join Us
             </Button>
