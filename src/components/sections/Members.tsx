@@ -121,7 +121,7 @@ const Members = () => {
       >
         <motion.h2
           variants={itemVariants}
-          className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 
+          className="text-4xl font-bold mb-6 
              bg-gradient-to-r from-green-700 via-emerald-600 to-green-500 
              bg-clip-text text-transparent"
         >
