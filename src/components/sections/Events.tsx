@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { CalendarDays, Clock, MapPin } from "lucide-react";
 import { Card } from "../ui/card";
@@ -76,6 +77,8 @@ const events: { upcoming: Event[]; past: Event[] } = {
 };
 
 const Events = () => {
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
+
   return (
     <section
       id="events"
@@ -235,14 +238,12 @@ const Events = () => {
                       </div>
                     </div>
                     <div className="mt-6">
-                      <a
-                        href={event.posterImage}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                      <button
+                        onClick={() => setPreviewImage(event.posterImage)}
                         className="block w-full rounded-lg px-4 py-2 text-center border bg-white text-purple-600 border-purple-600 hover:bg-purple-50 transition-colors"
                       >
                         See Poster
-                      </a>
+                      </button>
                     </div>
                   </div>
                 </Card>
@@ -251,6 +252,37 @@ const Events = () => {
           </div>
         </motion.div>
       </div>
+
+      {/* Poster Preview Modal */}
+      {previewImage && (
+        <div
+          className="fixed inset-0 bg-black/70 flex items-center justify-center z-50"
+          onClick={() => setPreviewImage(null)} // backdrop click closes modal
+        >
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.8, opacity: 0 }}
+            className="relative bg-white rounded-xl shadow-lg max-w-3xl w-full p-4"
+            onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
+          >
+            {/* Close button */}
+            <button
+              onClick={() => setPreviewImage(null)}
+              className="absolute -top-3 -right-3 bg-gray-800 text-white rounded-full shadow-lg p-2 hover:bg-red-600 transition-colors"
+            >
+              ✕
+            </button>
+
+            {/* Poster image */}
+            <img
+              src={previewImage}
+              alt="Event Poster"
+              className="rounded-lg w-full h-auto"
+            />
+          </motion.div>
+        </div>
+      )}
     </section>
   );
 };
