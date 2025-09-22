@@ -207,7 +207,7 @@ const Hero = () => {
       <AnimatePresence>
         {!hideIndicator && (
           <motion.div
-            className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-50 cursor-pointer"
+            className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 cursor-pointer"
             initial={{ opacity: 0, y: 20 }}
             animate={{
               opacity: animationStage >= 2 ? 1 : 0,
