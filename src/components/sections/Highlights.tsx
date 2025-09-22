@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Rocket } from 'lucide-react';
 import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
 
+
 const fadeIn = {
   hidden: { opacity: 0, y: 16 },
   show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
@@ -32,7 +33,7 @@ const cardVariants = {
     scale: 1,
     transition: {
       duration: 0.6,
-      ease: [0.22, 1, 0.36, 1], // Custom easing for smooth feel
+      ease: [0.22, 1, 0.36, 1] as const,
     },
   },
 };
@@ -45,7 +46,7 @@ const iconVariants = {
     transition: {
       duration: 4,
       repeat: Infinity,
-      ease: "easeInOut",
+      ease: "easeInOut" as const,
     },
   },
 };
@@ -139,7 +140,7 @@ const Highlights = () => {
               whileHover={{ 
                 y: -10,
                 scale: 1.02,
-                transition: { duration: 0.3, ease: "easeOut" }
+                transition: { duration: 0.3, ease: "easeOut" as const }
               }}
               whileTap={{ scale: 0.98 }}
             >
@@ -165,7 +166,7 @@ const Highlights = () => {
                   transition={{
                     duration: 20,
                     repeat: Infinity,
-                    ease: "linear"
+                    ease: "linear" as const
                   }}
                   style={{
                     backgroundImage: `radial-gradient(circle, currentColor 1px, transparent 1px)`,
@@ -190,7 +191,7 @@ const Highlights = () => {
                       transition={{
                         duration: 3,
                         repeat: Infinity,
-                        ease: "easeInOut",
+                        ease: "easeInOut" as const,
                         delay: idx * 0.5, // Stagger the glow animations
                       }}
                     />
@@ -241,7 +242,7 @@ const Highlights = () => {
                   initial={{ scaleX: 0 }}
                   whileHover={{ 
                     scaleX: 1,
-                    transition: { duration: 0.5, ease: "easeOut" }
+                    transition: { duration: 0.5, ease: "easeOut" as const }
                   }}
                   style={{ originX: 0 }}
                 />
@@ -292,7 +293,7 @@ const Highlights = () => {
                 duration: 2,
                 repeat: Infinity,
                 repeatType: "loop",
-                ease: "easeInOut",
+                ease: "easeInOut" as const,
               }}
             >
               <Rocket className="w-5 h-5" />
