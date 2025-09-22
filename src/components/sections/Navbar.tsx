@@ -21,6 +21,7 @@ const Navbar = () => {
 
   const navLinks = [
     { name: "Home", href: "#home" },
+    { name: "About", href: "#about" },
     { name: "Highlights", href: "#highlights" },
     { name: "Members", href: "#members" }
   ]
@@ -52,7 +53,7 @@ const Navbar = () => {
   }
 
   return (
-    <div className={`w-full border-b border-gray-200 bg-white sticky top-0 z-50 shadow-b shadow-green-300/30 ${
+    <div className={`w-full border-b border-gray-200 bg-white sticky top-0 z-99 shadow-b shadow-green-300/30 ${
         isScrolled ? "shadow-md shadow-green-300/30" : ""}`}>
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-5 sm:px-6 lg:px-8">
         {/* Logo */}
