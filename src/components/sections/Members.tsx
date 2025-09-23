@@ -60,11 +60,6 @@ const testimonialVariants: Variants = {
   }),
 };
 
-const fadeIn = {
-  hidden: { opacity: 0, y: 16 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-};
-
 const Members = () => {
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(0);
@@ -79,6 +74,15 @@ const Members = () => {
         ? (prev + 1) % members.length
         : (prev - 1 + members.length) % members.length
     );
+  };
+
+  // Handle member click from AnimatedTooltip
+  const handleMemberClick = (item: { id: number; name: string; designation: string; image: string }) => {
+    // Find the full member data including the 'desc' property
+    const fullMember = members.find(member => member.id === item.id);
+    if (fullMember) {
+      setSelectedMembers(fullMember);
+    }
   };
 
   // Auto-play
@@ -103,6 +107,10 @@ const Members = () => {
       >
         <motion.h2
           variants={itemVariants}
+          initial={{ opacity: 0, y: -30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            viewport={{ once: true }}
           className="text-4xl font-bold mb-6 
              bg-gradient-to-r from-green-700 via-emerald-600 to-green-500 
              bg-clip-text text-transparent"
@@ -111,6 +119,10 @@ const Members = () => {
         </motion.h2>
         <motion.p
           variants={itemVariants}
+          initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
           className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto"
         >
          Meet the people driving TechTribe forward
@@ -182,7 +194,7 @@ const Members = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
             viewport={{ once: true }}>
-      <AnimatedTooltip items={members} onClick={setSelectedMembers}  />
+      <AnimatedTooltip items={members} onClick={handleMemberClick}  />
     </motion.div>
 
     <AnimatePresence>

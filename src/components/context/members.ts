@@ -46,6 +46,6 @@ export const members = [
     designation: "The Explorer",
     desc: "Sophia is a creative designer with strong skills in wireframing, prototyping, and user research. She excels at crafting visually appealing designs that balance aesthetics with usability.",
     image:
-      "/shikimori.jpg",
+      "/public/shikimori.jpg",
   },
 ]
