@@ -6,7 +6,7 @@ export const members = [
     designation: "Software Engineer",
     desc: "Sophia is a creative designer with strong skills in wireframing, prototyping, and user research. She excels at crafting visually appealing designs that balance aesthetics with usability.",
     image:
-      "/public/naruto.jpg",
+      "/naruto.jpg",
   },
   {
     id: 2,
@@ -14,7 +14,7 @@ export const members = [
     designation: "Product Manager",
     desc: "Sophia is a creative designer with strong skills in wireframing, prototyping, and user research. She excels at crafting visually appealing designs that balance aesthetics with usability.",
     image:
-      "/public/alya.jpg",
+      "/alya.jpg",
   },
   {
     id: 3,
@@ -22,7 +22,7 @@ export const members = [
     designation: "Data Scientist",
     desc: "Alice is skilled in building responsive and interactive web interfaces using React and modern CSS frameworks. She specializes in creating smooth user experiences with a strong eye for detail.",
     image:
-      "/public/lufi.jpg",
+      "/lufi.jpg",
   },
   {
     id: 4,
@@ -30,7 +30,7 @@ export const members = [
     designation: "UX Designer",
     desc: "Ravi has expertise in Node.js and database management, focusing on scalable and secure backend systems. He’s passionate about APIs, microservices, and optimizing server performance.",
     image:
-      "/public/makima.jpg",
+      "/makima.jpg",
   },
   {
     id: 5,
@@ -38,7 +38,7 @@ export const members = [
     designation: "Soap Developer",
     desc: "Alice is skilled in building responsive and interactive web interfaces using React and modern CSS frameworks. She specializes in creating smooth user experiences with a strong eye for detail.",
     image:
-      "/public/gojo.jpg",
+      "/gojo.jpg",
   },
   {
     id: 6,
@@ -46,6 +46,6 @@ export const members = [
     designation: "The Explorer",
     desc: "Sophia is a creative designer with strong skills in wireframing, prototyping, and user research. She excels at crafting visually appealing designs that balance aesthetics with usability.",
     image:
-      "/public/shikimori.jpg",
+      "/shikimori.jpg",
   },
 ]
