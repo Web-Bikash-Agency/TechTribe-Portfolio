@@ -3,35 +3,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import type { Variants, Transition } from "framer-motion"
 
 import { ChevronLeft } from "../../motion/ChevronLeft";
-import { ChevronRight } from "../../motion/ChevronRight ";
+import { ChevronRight } from "../../motion/ChevronRight";
+import { members } from "../context/members";
 
+import { AnimatedTooltip } from "../../animation/AnimatedTooltips";
 
-const testimonials = [
-  {
-    name: "Alice Johnson",
-    role: "Frontend Developer",
-    company: "TechCorp",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face",
-    desc: "Alice is skilled in building responsive and interactive web interfaces using React and modern CSS frameworks. She specializes in creating smooth user experiences with a strong eye for detail.",
-    rating: 5,
-  },
-  {
-    name: "Ravi Kumar",
-    role: "Backend Engineer",
-    company: "StartupFlow",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
-    desc: "Ravi has expertise in Node.js and database management, focusing on scalable and secure backend systems. He’s passionate about APIs, microservices, and optimizing server performance.",
-    rating: 5,
-  },
-  {
-    name: "Sophia Lee",
-    role: "UI/UX Designer",
-    company: "DesignStudio",
-    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&h=150&fit=crop&crop=face",
-    desc: "Sophia is a creative designer with strong skills in wireframing, prototyping, and user research. She excels at crafting visually appealing designs that balance aesthetics with usability.",
-    rating: 5,
-  },
-];
 
 // Generic transition for smooth animations
 const smoothTransition: Transition = {
@@ -84,18 +60,24 @@ const testimonialVariants: Variants = {
   }),
 };
 
+const fadeIn = {
+  hidden: { opacity: 0, y: 16 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
+
 const Members = () => {
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [selectedMembers, setSelectedMembers] = useState<typeof members[0] | null>(null);
 
   // Function to move carousel
   const swipeToTestimonial = (newDirection: number) => {
     setDirection(newDirection);
     setCurrent((prev) =>
       newDirection === 1
-        ? (prev + 1) % testimonials.length
-        : (prev - 1 + testimonials.length) % testimonials.length
+        ? (prev + 1) % members.length
+        : (prev - 1 + members.length) % members.length
     );
   };
 
@@ -131,8 +113,7 @@ const Members = () => {
           variants={itemVariants}
           className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto"
         >
-          Discover how TechTribe has transformed careers and built lasting
-          connections in our vibrant developer community
+         Meet the people driving TechTribe forward
         </motion.p>
       </motion.div>
 
@@ -153,23 +134,21 @@ const Members = () => {
             <div className="bg-white/90 backdrop-blur-sm rounded-3xl shadow-xl 
                 p-8 md:p-12 max-w-2xl border border-green-100">
               <img
-                src={testimonials[current].image}
-                alt={testimonials[current].name}
+                src={members[current].image}
+                alt={members[current].name}
+                onClick={() => setSelectedMembers(members[current])}
                 className="w-24 h-24 rounded-full object-cover border-4 border-green-300 shadow-lg mx-auto mb-6"
               />
               <div className="text-center space-y-1">
 
                 <h3 className="text-2xl font-bold text-green-800">
-                  {testimonials[current].name}
+                  {members[current].name}
                 </h3>
                 <p className="text-emerald-600 font-semibold">
-                  {testimonials[current].role}
-                </p>
-                <p className="text-green-500 text-sm mb-4">
-                  @{testimonials[current].company}
+                  {members[current].designation}
                 </p>
                 <blockquote className="text-gray-700 text-lg italic">
-                  "{testimonials[current].desc}"
+                  "{members[current].desc}"
                 </blockquote>
               </div>
             </div>
@@ -178,7 +157,10 @@ const Members = () => {
       </div>
 
       {/* Controls */}
-      <div className="flex justify-center mt-8 space-x-6">
+      <motion.div className="flex justify-center mt-8 space-x-6" initial={{ opacity: 0, y: -30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            viewport={{ once: true }}>
         <button
           onClick={() => swipeToTestimonial(-1)}
           className="p-3 rounded-full bg-white border border-green-300 
@@ -195,7 +177,53 @@ const Members = () => {
         >
          <ChevronRight/>
         </button>
-      </div>
+      </motion.div>
+      <motion.div className="flex flex-row items-center justify-center mt-15 w-full" initial={{ opacity: 0, y: -30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            viewport={{ once: true }}>
+      <AnimatedTooltip items={members} onClick={setSelectedMembers}  />
+    </motion.div>
+
+    <AnimatePresence>
+        {selectedMembers && (
+          <motion.div
+            key={selectedMembers.id}
+            initial={{ opacity: 0, y: 50, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 50, scale: 0.9 }}
+            transition={{ duration: 0.4 }}
+            className="fixed inset-0 flex items-center justify-center bg-black/40 z-50"
+            onClick={() => setSelectedMembers(null)}
+          >
+            <div
+              className="bg-white rounded-2xl shadow-xl p-8 max-w-lg w-full relative"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                className="absolute top-4 right-4 text-gray-500 hover:text-green-500"
+                onClick={() => setSelectedMembers(null)}
+              >
+                ✕
+              </button>
+              <img
+                src={selectedMembers.image}
+                alt={selectedMembers.name}
+                className="w-28 h-28 rounded-full object-cover border-4 border-green-300 shadow-lg mx-auto mb-6"
+              />
+              <h3 className="text-2xl font-bold text-green-800 text-center">
+                {selectedMembers.name}
+              </h3>
+              <p className="text-emerald-600 font-semibold text-center">
+                {selectedMembers.designation}
+              </p>
+              <blockquote className="text-gray-700 text-lg italic text-center mt-4">
+                {selectedMembers.desc}
+              </blockquote>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
