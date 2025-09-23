@@ -133,7 +133,7 @@ const Hero = () => {
             initial="hidden"
             animate={animationStage >= 1 ? "show" : "hidden"}
           >
-            <h1 className="mb-10 z-40 text-6xl sm:text-7xl md:text-8xl font-extrabold tracking-tight text-gray-600 text-center">
+            <h1 className="mb-10 text-6xl sm:text-7xl md:text-8xl font-extrabold tracking-tight text-gray-600 text-center cursor-pointer">
               Welcome to <span className="text-green-600">TechTribe</span>
             </h1>
           </motion.div>
