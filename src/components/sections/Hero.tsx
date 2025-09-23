@@ -3,7 +3,6 @@ import { BackgroundBeams } from "../../animation/BackgroundBeams"
 import { TypewriterEffect } from "../../animation/TypewriterEffect"
 import { TextGenerateEffect } from "../../animation/TextGenerateEffect"
 import { Button } from "../../animation/MovingBorder";
-// import { BackgroundLines } from "../../animation/BackgroundLines"
 import { motion } from "framer-motion";
 
 const fadeInUp = {
@@ -159,8 +158,7 @@ const Hero = () => {
   borderRadius="0.75rem"
   duration={4000}
   containerClassName="z-20"
-  borderClassName="border border-green-400/20" 
-  here
+  borderClassName="border border-green-400/20"
   className="px-4 py-2 bg-white text-gray-700 font-medium hover:bg-green-50 hover:text-green-700 transition-colors duration-100"
 >
   Explore
