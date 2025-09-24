@@ -5,8 +5,10 @@ import type { Variants, Transition } from "framer-motion"
 import { ChevronLeft } from "../../motion/ChevronLeft";
 import { ChevronRight } from "../../motion/ChevronRight";
 import { members } from "../context/members";
-
+import { founder } from "../context/founder";
+import { coreTeam } from "../context/coreTeam";
 import { AnimatedTooltip } from "../../animation/AnimatedTooltips";
+
 
 
 // Generic transition for smooth animations
@@ -64,7 +66,8 @@ const Members = () => {
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const [selectedMembers, setSelectedMembers] = useState<typeof members[0] | null>(null);
+  const [selectedFounder, setSelectedFounder] = useState<typeof founder[0] | null>(null);
+  const [selectedCoreTeam, setSelectedCoreTeam] = useState<typeof founder[0] | null>(null);
 
   // Function to move carousel
   const swipeToTestimonial = (newDirection: number) => {
@@ -76,12 +79,20 @@ const Members = () => {
     );
   };
 
-  // Handle member click from AnimatedTooltip
-  const handleMemberClick = (item: { id: number; name: string; designation: string; image: string }) => {
+  // Handle Founder click from AnimatedTooltip
+  const handleFounderClick = (item: { id: number; name: string; designation: string; image: string }) => {
     // Find the full member data including the 'desc' property
-    const fullMember = members.find(member => member.id === item.id);
-    if (fullMember) {
-      setSelectedMembers(fullMember);
+    const fullFounder = founder.find(founder => founder.id === item.id);
+    if (fullFounder) {
+      setSelectedFounder(fullFounder);
+    }
+  };
+  // Handle Founder click from AnimatedTooltip
+  const handleCoreTeamClick = (item: { id: number; name: string; designation: string; image: string }) => {
+    // Find the full member data including the 'desc' property
+    const fullCoreTeam = coreTeam.find(coreTeam => coreTeam.id === item.id);
+    if (fullCoreTeam) {
+      setSelectedFounder(fullCoreTeam);
     }
   };
 
@@ -108,24 +119,24 @@ const Members = () => {
         <motion.h2
           variants={itemVariants}
           initial={{ opacity: 0, y: -30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            viewport={{ once: true }}
-          className="text-4xl font-bold mb-6 
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          viewport={{ once: true }}
+          className="text-4xl font-bold mb-6 -mt-10
              bg-gradient-to-r from-green-700 via-emerald-600 to-green-500 
              bg-clip-text text-transparent"
         >
-          Core Team Members
+          Team Members
         </motion.h2>
         <motion.p
           variants={itemVariants}
           initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          viewport={{ once: true }}
           className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto"
         >
-         Meet the people driving TechTribe forward
+          Meet the people driving TechTribe forward
         </motion.p>
       </motion.div>
 
@@ -148,7 +159,6 @@ const Members = () => {
               <img
                 src={members[current].image}
                 alt={members[current].name}
-                onClick={() => setSelectedMembers(members[current])}
                 className="w-24 h-24 rounded-full object-cover border-4 border-green-300 shadow-lg mx-auto mb-6"
               />
               <div className="text-center space-y-1">
@@ -170,16 +180,16 @@ const Members = () => {
 
       {/* Controls */}
       <motion.div className="flex justify-center mt-8 space-x-6" initial={{ opacity: 0, y: -30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            viewport={{ once: true }}>
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
+        viewport={{ once: true }}>
         <button
           onClick={() => swipeToTestimonial(-1)}
           className="p-3 rounded-full bg-white border border-green-300 
                shadow hover:bg-green-50 hover:shadow-lg 
                transition-all duration-300 text-green-700"
         >
-          <ChevronLeft/>
+          <ChevronLeft />
         </button>
         <button
           onClick={() => swipeToTestimonial(1)}
@@ -187,26 +197,29 @@ const Members = () => {
                shadow hover:bg-green-50 hover:shadow-lg 
                transition-all duration-300 text-green-700"
         >
-         <ChevronRight/>
+          <ChevronRight />
         </button>
       </motion.div>
-      <motion.div className="flex flex-row items-center justify-center mt-15 w-full" initial={{ opacity: 0, y: -30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            viewport={{ once: true }}>
-      <AnimatedTooltip items={members} onClick={handleMemberClick}  />
-    </motion.div>
 
-    <AnimatePresence>
-        {selectedMembers && (
+        {/* Core Team  */}
+ <motion.div className="flex flex-row items-center justify-center mt-10 w-full" initial={{ opacity: 0, y: -30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
+        viewport={{ once: true }}>
+
+        <span className="z-50 text-lg font-bold text-green-900 mr-5">Core Team </span> <AnimatedTooltip items={coreTeam} onClick={handleCoreTeamClick} />
+      </motion.div>
+      <AnimatePresence>
+
+        {selectedCoreTeam && (
           <motion.div
-            key={selectedMembers.id}
+            key={selectedCoreTeam.id}
             initial={{ opacity: 0, y: 50, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 50, scale: 0.9 }}
             transition={{ duration: 0.4 }}
             className="fixed inset-0 flex items-center justify-center bg-black/40 z-50"
-            onClick={() => setSelectedMembers(null)}
+            onClick={() => setSelectedCoreTeam(null)}
           >
             <div
               className="bg-white rounded-2xl shadow-xl p-8 max-w-lg w-full relative"
@@ -214,23 +227,72 @@ const Members = () => {
             >
               <button
                 className="absolute top-4 right-4 text-gray-500 hover:text-green-500"
-                onClick={() => setSelectedMembers(null)}
+                onClick={() => setSelectedCoreTeam(null)}
               >
                 ✕
               </button>
               <img
-                src={selectedMembers.image}
-                alt={selectedMembers.name}
+                src={selectedCoreTeam.image}
+                alt={selectedCoreTeam.name}
                 className="w-28 h-28 rounded-full object-cover border-4 border-green-300 shadow-lg mx-auto mb-6"
               />
               <h3 className="text-2xl font-bold text-green-800 text-center">
-                {selectedMembers.name}
+                {selectedCoreTeam.name}
               </h3>
               <p className="text-emerald-600 font-semibold text-center">
-                {selectedMembers.designation}
+                {selectedCoreTeam.designation}
               </p>
               <blockquote className="text-gray-700 text-lg italic text-center mt-4">
-                {selectedMembers.desc}
+                {selectedCoreTeam.desc}
+              </blockquote>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Founders */}
+      <motion.div className="flex flex-row items-center justify-center mt-10 w-full" initial={{ opacity: 0, y: -30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
+        viewport={{ once: true }}>
+
+        <span className="z-50 text-lg font-bold text-green-900 mr-5">Mind Behind This:</span> <AnimatedTooltip items={founder} onClick={handleFounderClick} />
+      </motion.div>
+      <AnimatePresence>
+
+        {selectedFounder && (
+          <motion.div
+            key={selectedFounder.id}
+            initial={{ opacity: 0, y: 50, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 50, scale: 0.9 }}
+            transition={{ duration: 0.4 }}
+            className="fixed inset-0 flex items-center justify-center bg-black/40 z-50"
+            onClick={() => setSelectedFounder(null)}
+          >
+            <div
+              className="bg-white rounded-2xl shadow-xl p-8 max-w-lg w-full relative"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                className="absolute top-4 right-4 text-gray-500 hover:text-green-500"
+                onClick={() => setSelectedFounder(null)}
+              >
+                ✕
+              </button>
+              <img
+                src={selectedFounder.image}
+                alt={selectedFounder.name}
+                className="w-28 h-28 rounded-full object-cover border-4 border-green-300 shadow-lg mx-auto mb-6"
+              />
+              <h3 className="text-2xl font-bold text-green-800 text-center">
+                {selectedFounder.name}
+              </h3>
+              <p className="text-emerald-600 font-semibold text-center">
+                {selectedFounder.designation}
+              </p>
+              <blockquote className="text-gray-700 text-lg italic text-center mt-4">
+                {selectedFounder.desc}
               </blockquote>
             </div>
           </motion.div>
