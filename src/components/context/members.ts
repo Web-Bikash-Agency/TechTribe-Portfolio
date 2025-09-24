@@ -48,4 +48,20 @@ export const members = [
     image:
       "/shikimori.jpg",
   },
+  {
+    id: 7,
+    name: "Kaoruko Waguri",
+    designation: "The Explorer",
+    desc: "Sophia is a creative designer with strong skills in wireframing, prototyping, and user research. She excels at crafting visually appealing designs that balance aesthetics with usability.",
+    image:
+      "/waguri.jpg",
+  },
+  {
+    id: 8,
+    name: "astha",
+    designation: "The Explorer",
+    desc: "Sophia is a creative designer with strong skills in wireframing, prototyping, and user research. She excels at crafting visually appealing designs that balance aesthetics with usability.",
+    image:
+      "/astha.jpg",
+  },
 ]
