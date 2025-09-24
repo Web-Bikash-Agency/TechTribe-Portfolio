@@ -7,7 +7,7 @@ const About = () => {
 
         {/* Founder Section */}
         <motion.div
-          className="md:w-1/3 flex flex-col items-center justify-center mr-20 md:mr-10 relative"
+          className="md:w-1/3 flex flex-col items-center justify-center mr-20 md:mr-15 relative"
           animate={{ y: [-5, 5, -5] }}
           transition={{
             duration: 3,
