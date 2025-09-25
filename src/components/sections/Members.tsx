@@ -122,12 +122,12 @@ const Members = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
           viewport={{ once: true }}
-          className="text-4xl font-bold mb-6 -mt-10
-             bg-gradient-to-r from-green-700 via-emerald-600 to-green-500 
-             bg-clip-text text-transparent"
+          className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-green-700 via-emerald-600 to-green-500 
+            bg-clip-text text-transparent mb-6"
         >
           Team Members
         </motion.h2>
+        <div className="w-24 h-1 bg-gradient-to-r from-green-400 to-emerald-400 mx-auto mb-8 rounded-full"></div>
         <motion.p
           variants={itemVariants}
           initial={{ opacity: 0, y: 20 }}
@@ -207,7 +207,7 @@ const Members = () => {
         transition={{ duration: 0.7 }}
         viewport={{ once: true }}>
 
-        <span className="z-50 text-lg font-bold text-green-900 mr-5">Core Team </span> <AnimatedTooltip items={coreTeam} onClick={handleCoreTeamClick} />
+        <span className="z-50 text-lg font-bold text-green-900 mr-5">Core Team:</span> <AnimatedTooltip items={coreTeam} onClick={handleCoreTeamClick} />
       </motion.div>
       <AnimatePresence>
 
