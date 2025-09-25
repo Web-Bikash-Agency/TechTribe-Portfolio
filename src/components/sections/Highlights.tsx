@@ -22,13 +22,13 @@ const containerVariants = {
 
 // Card animation variants
 const cardVariants = {
-  hidden: { 
-    opacity: 0, 
+  hidden: {
+    opacity: 0,
     y: 50,
     scale: 0.9,
   },
-  show: { 
-    opacity: 1, 
+  show: {
+    opacity: 1,
     y: 0,
     scale: 1,
     transition: {
@@ -104,17 +104,18 @@ const Highlights = () => {
       {/* Header Grid  */}
       <div className="container mx-auto px-4">
         <div className="mb-16 text-center">
-          <motion.h2 
+          <motion.h2
             variants={fadeIn}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className="text-4xl font-bold pb-1 bg-gradient-to-r from-green-700 via-emerald-600 to-green-500 bg-clip-text text-transparent"
+            className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-green-700 via-emerald-600 to-green-500 
+            bg-clip-text text-transparent mb-6"
           >
             Community Highlights
           </motion.h2>
-
-          <motion.p 
+          <div className="w-24 h-1 bg-gradient-to-r from-green-400 to-emerald-400 mx-auto mb-8 rounded-full"></div>
+          <motion.p
             variants={fadeIn}
             initial="hidden"
             whileInView="show"
@@ -126,7 +127,7 @@ const Highlights = () => {
         </div>
 
         {/* Animated highlights grid */}
-        <motion.div 
+        <motion.div
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
           variants={containerVariants}
           initial="hidden"
@@ -134,10 +135,10 @@ const Highlights = () => {
           viewport={{ once: true, margin: "-100px" }}
         >
           {highlights.map((highlight, idx) => (
-            <motion.div 
+            <motion.div
               key={idx}
               variants={cardVariants}
-              whileHover={{ 
+              whileHover={{
                 y: -10,
                 scale: 1.02,
                 transition: { duration: 0.3, ease: "easeOut" as const }
@@ -147,10 +148,10 @@ const Highlights = () => {
               <Card className={`relative overflow-hidden rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border-0 ${highlight.bgColor} cursor-pointer group`}>
 
                 {/* Animated gradient overlay on hover */}
-                <motion.div 
+                <motion.div
                   className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent"
                   initial={{ opacity: 0 }}
-                  whileHover={{ 
+                  whileHover={{
                     opacity: 1,
                     transition: { duration: 0.3 }
                   }}
@@ -160,7 +161,7 @@ const Highlights = () => {
                 <motion.div
                   className="absolute inset-0 opacity-10"
                   initial={{ backgroundPosition: "0% 0%" }}
-                  animate={{ 
+                  animate={{
                     backgroundPosition: ["0% 0%", "100% 100%", "0% 0%"],
                   }}
                   transition={{
@@ -177,9 +178,9 @@ const Highlights = () => {
                 <CardHeader className="relative flex flex-col items-center z-10 space-y-6 p-0">
                   <div className="relative">
                     {/* Animated glow effect */}
-                    <motion.div 
+                    <motion.div
                       className={`absolute inset-0 bg-gradient-to-r ${highlight.color} rounded-full blur-lg opacity-30`}
-                      whileHover={{ 
+                      whileHover={{
                         opacity: 0.6,
                         scale: 1.2,
                         transition: { duration: 0.3 }
@@ -195,9 +196,9 @@ const Highlights = () => {
                         delay: idx * 0.5, // Stagger the glow animations
                       }}
                     />
-                    
+
                     {/* Floating icon */}
-                    <motion.div 
+                    <motion.div
                       className="relative text-6xl mb-2 filter drop-shadow-sm"
                       variants={iconVariants}
                       animate="float"
@@ -209,8 +210,8 @@ const Highlights = () => {
 
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ 
-                      opacity: 1, 
+                    whileInView={{
+                      opacity: 1,
                       y: 0,
                       transition: { delay: 0.2 + idx * 0.1 }
                     }}
@@ -224,8 +225,8 @@ const Highlights = () => {
 
                 <motion.div
                   initial={{ opacity: 0, y: 15 }}
-                  whileInView={{ 
-                    opacity: 1, 
+                  whileInView={{
+                    opacity: 1,
                     y: 0,
                     transition: { delay: 0.4 + idx * 0.1 }
                   }}
@@ -237,10 +238,10 @@ const Highlights = () => {
                 </motion.div>
 
                 {/* Animated bottom border */}
-                <motion.div 
+                <motion.div
                   className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${highlight.color}`}
                   initial={{ scaleX: 0 }}
-                  whileHover={{ 
+                  whileHover={{
                     scaleX: 1,
                     transition: { duration: 0.5, ease: "easeOut" as const }
                   }}
@@ -255,7 +256,7 @@ const Highlights = () => {
                     scale: [1, 1.05, 1],
                     transition: { duration: 0.6 }
                   }}
-                  style={{ 
+                  style={{
                     background: `linear-gradient(135deg, transparent, transparent)`,
                     backgroundClip: 'padding-box',
                   }}
@@ -266,19 +267,19 @@ const Highlights = () => {
         </motion.div>
 
         {/* Animated CTA button */}
-        <motion.div 
+        <motion.div
           className="mt-20 flex justify-center"
           initial={{ opacity: 0, y: 30 }}
-          whileInView={{ 
-            opacity: 1, 
+          whileInView={{
+            opacity: 1,
             y: 0,
             transition: { delay: 0.8, duration: 0.6 }
           }}
           viewport={{ once: true }}
         >
-          <motion.button 
+          <motion.button
             className="group inline-flex items-center gap-3 rounded-full border border-green-300 text-green-500 bg-green-50 px-7 py-4"
-            whileHover={{ 
+            whileHover={{
               scale: 1.05,
               boxShadow: "0 10px 25px -5px rgba(34, 197, 94, 0.2)",
               transition: { duration: 0.2 }
