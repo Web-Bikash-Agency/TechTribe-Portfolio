@@ -100,6 +100,7 @@ const Highlights = () => {
   return (
     <section className="min-h-screen py-20 bg-gray-50 border-b border-gray-200"
       id="highlights"
+      
     >
       {/* Header Grid  */}
       <div className="container mx-auto px-4">
