@@ -13,13 +13,13 @@ type AnimatedTooltipProps = {
    items: {
     id: number;
     name: string;
-    designation: string;
+    role: string;
     image: string;
   }[];
   onClick?: (item: {
     id: number;
     name: string;
-    designation: string;
+    role: string;
     image: string;
   }) => void;
 };
@@ -90,7 +90,7 @@ export const AnimatedTooltip = ({
                 <div className="relative z-30 text-base font-bold text-white">
                   {item.name}
                 </div>
-                <div className="text-xs text-white">{item.designation}</div>
+                <div className="text-xs text-white">{item.role}</div>
               </motion.div>
             )}
           </AnimatePresence>
