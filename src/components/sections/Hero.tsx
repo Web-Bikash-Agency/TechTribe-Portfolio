@@ -5,7 +5,6 @@ import { Rocket } from "lucide-react"
 import { Button } from "../../animation/MovingBorder";
 import { motion, AnimatePresence } from "framer-motion";
 
-
 const Hero = () => {
   const [animationStage, setAnimationStage] = useState(0);
   const [hideIndicator, setHideIndicator] = useState(false);
