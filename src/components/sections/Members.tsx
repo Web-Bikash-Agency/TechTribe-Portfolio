@@ -51,7 +51,7 @@ const itemVariants: Variants = {
 
 const Members = () => {
   const [current, setCurrent] = useState(2);
-  const [direction, setDirection] = useState(0);
+  // const [direction, setDirection] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const [selectedFounder, setSelectedFounder] = useState<TeamMember | null>(null);
@@ -66,18 +66,15 @@ const Members = () => {
   }, [current, isAutoPlaying]);
 
   const handleNext = () => {
-    setDirection(1);
     setCurrent((prev) => (prev + 1) % members.length);
   };
 
   const handlePrev = () => {
-    setDirection(-1);
     setCurrent((prev) => (prev - 1 + members.length) % members.length);
   };
 
   const handleCardClick = (index: number) => {
     if (index === current) return;
-    setDirection(index > current ? 1 : -1);
     setCurrent(index);
   };
 
