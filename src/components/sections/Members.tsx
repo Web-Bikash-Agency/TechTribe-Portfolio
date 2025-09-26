@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import type { Variants, Transition } from "framer-motion"
-
+import { Linkedin, Github, Instagram } from "lucide-react";
 import { ChevronLeft } from "../../motion/ChevronLeft";
 import { ChevronRight } from "../../motion/ChevronRight";
 import { members } from "../context/members";
@@ -80,7 +80,7 @@ const Members = () => {
   };
 
   // Handle Founder click from AnimatedTooltip
-  const handleFounderClick = (item: { id: number; name: string; designation: string; image: string }) => {
+  const handleFounderClick = (item: { id: number; name: string; role: string; image: string }) => {
     // Find the full member data including the 'desc' property
     const fullFounder = founder.find(founder => founder.id === item.id);
     if (fullFounder) {
@@ -88,7 +88,7 @@ const Members = () => {
     }
   };
   // Handle Founder click from AnimatedTooltip
-  const handleCoreTeamClick = (item: { id: number; name: string; designation: string; image: string }) => {
+  const handleCoreTeamClick = (item: { id: number; name: string; role: string; image: string }) => {
     // Find the full member data including the 'desc' property
     const fullCoreTeam = coreTeam.find(coreTeam => coreTeam.id === item.id);
     if (fullCoreTeam) {
@@ -173,6 +173,18 @@ const Members = () => {
                   "{members[current].desc}"
                 </blockquote>
               </div>
+              {/* Social Icons */}
+              <div className="flex justify-center space-x-4 mt-4">
+                <a href={members[current].linkedin || "#"} target="_blank" rel="noopener noreferrer" className="text-green-700 hover:text-green-900 transition-colors">
+                  <Linkedin size={24} />
+                </a>
+                <a href={members[current].github || "#"} target="_blank" rel="noopener noreferrer" className="text-green-700 hover:text-green-900 transition-colors">
+                  <Github size={24} />
+                </a>
+                <a href={members[current].instagram || "#"} target="_blank" rel="noopener noreferrer" className="text-green-700 hover:text-green-900 transition-colors">
+                  <Instagram size={24} />
+                </a>
+              </div>
             </div>
           </motion.div>
         </AnimatePresence>
@@ -201,8 +213,8 @@ const Members = () => {
         </button>
       </motion.div>
 
-        {/* Core Team  */}
- <motion.div className="flex flex-row items-center justify-center mt-10 w-full" initial={{ opacity: 0, y: -30 }}
+      {/* Core Team  */}
+      <motion.div className="flex flex-row items-center justify-center mt-10 w-full" initial={{ opacity: 0, y: -30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
         viewport={{ once: true }}>
@@ -242,10 +254,26 @@ const Members = () => {
               <p className="text-emerald-600 font-semibold text-center">
                 {selectedCoreTeam.designation}
               </p>
+              <p className="text-emerald-600 font-semibold text-center">
+                {selectedCoreTeam.role}
+              </p>
               <blockquote className="text-gray-700 text-lg italic text-center mt-4">
                 {selectedCoreTeam.desc}
               </blockquote>
+              {/* Social Icons */}
+              <div className="flex justify-center space-x-4 mt-4">
+                <a href={members[current].linkedin || "#"} target="_blank" rel="noopener noreferrer" className="text-green-700 hover:text-green-900 transition-colors">
+                  <Linkedin size={24} />
+                </a>
+                <a href={members[current].github || "#"} target="_blank" rel="noopener noreferrer" className="text-green-700 hover:text-green-900 transition-colors">
+                  <Github size={24} />
+                </a>
+                <a href={members[current].instagram || "#"} target="_blank" rel="noopener noreferrer" className="text-green-700 hover:text-green-900 transition-colors">
+                  <Instagram size={24} />
+                </a>
+              </div>
             </div>
+
           </motion.div>
         )}
       </AnimatePresence>
@@ -291,9 +319,24 @@ const Members = () => {
               <p className="text-emerald-600 font-semibold text-center">
                 {selectedFounder.designation}
               </p>
+              <p className="text-emerald-600 font-semibold text-center">
+                {selectedFounder.role}
+              </p>
               <blockquote className="text-gray-700 text-lg italic text-center mt-4">
                 {selectedFounder.desc}
               </blockquote>
+              {/* Social Icons */}
+              <div className="flex justify-center space-x-4 mt-4">
+                <a href={members[current].linkedin || "#"} target="_blank" rel="noopener noreferrer" className="text-green-700 hover:text-green-900 transition-colors">
+                  <Linkedin size={24} />
+                </a>
+                <a href={members[current].github || "#"} target="_blank" rel="noopener noreferrer" className="text-green-700 hover:text-green-900 transition-colors">
+                  <Github size={24} />
+                </a>
+                <a href={members[current].instagram || "#"} target="_blank" rel="noopener noreferrer" className="text-green-700 hover:text-green-900 transition-colors">
+                  <Instagram size={24} />
+                </a>
+              </div>
             </div>
           </motion.div>
         )}
