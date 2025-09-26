@@ -1,21 +1,34 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import type { Variants, Transition } from "framer-motion"
-import { Linkedin, Github, Instagram } from "lucide-react";
-import { ChevronLeft } from "../../motion/ChevronLeft";
-import { ChevronRight } from "../../motion/ChevronRight";
+import type { Variants } from "framer-motion"
+import { Linkedin, Github, Instagram, ChevronLeft, ChevronRight } from "lucide-react";
 import { members } from "../context/members";
 import { founder } from "../context/founder";
 import { coreTeam } from "../context/coreTeam";
 import { AnimatedTooltip } from "../../animation/AnimatedTooltips";
 
+// Define types for our data structures
+interface TeamMember {
+  id: number;
+  name: string;
+  designation: string;
+  role: string;
+  image: string;
+  desc: string;
+  linkedin?: string;
+  github?: string;
+  instagram?: string;
+}
 
-
-// Generic transition for smooth animations
-const smoothTransition: Transition = {
-  duration: 0.7,
-  ease: "easeInOut",
-};
+interface TooltipItem {
+  id: number;
+  name: string;
+  role: string;
+  image: string;
+  linkedin?: string;
+  github?: string;
+  instagram?: string;
+}
 
 // Parent container
 const containerVariants: Variants = {
@@ -36,72 +49,73 @@ const itemVariants: Variants = {
   },
 };
 
-// Carousel (direction-aware)
-const testimonialVariants: Variants = {
-  enter: (direction: number) => ({
-    x: direction > 0 ? 300 : -300,
-    opacity: 0,
-    scale: 0.9,
-    rotateY: direction > 0 ? 45 : -45,
-  }),
-  center: {
-    zIndex: 1,
-    x: 0,
-    opacity: 1,
-    scale: 1,
-    rotateY: 0,
-    transition: smoothTransition,
-  },
-  exit: (direction: number) => ({
-    zIndex: 0,
-    x: direction < 0 ? 300 : -300,
-    opacity: 0,
-    scale: 0.9,
-    rotateY: direction < 0 ? 45 : -45,
-    transition: smoothTransition,
-  }),
-};
-
 const Members = () => {
-  const [current, setCurrent] = useState(0);
+  const [current, setCurrent] = useState(2);
   const [direction, setDirection] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const [selectedFounder, setSelectedFounder] = useState<typeof founder[0] | null>(null);
-  const [selectedCoreTeam, setSelectedCoreTeam] = useState<typeof founder[0] | null>(null);
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const [selectedFounder, setSelectedFounder] = useState<TeamMember | null>(null);
+  const [selectedCoreTeam, setSelectedCoreTeam] = useState<TeamMember | null>(null);
 
-  // Function to move carousel
-  const swipeToTestimonial = (newDirection: number) => {
-    setDirection(newDirection);
-    setCurrent((prev) =>
-      newDirection === 1
-        ? (prev + 1) % members.length
-        : (prev - 1 + members.length) % members.length
-    );
-  };
-
-  // Handle Founder click from AnimatedTooltip
-  const handleFounderClick = (item: { id: number; name: string; role: string; image: string }) => {
-    // Find the full member data including the 'desc' property
-    const fullFounder = founder.find(founder => founder.id === item.id);
-    if (fullFounder) {
-      setSelectedFounder(fullFounder);
-    }
-  };
-  // Handle Founder click from AnimatedTooltip
-  const handleCoreTeamClick = (item: { id: number; name: string; role: string; image: string }) => {
-    // Find the full member data including the 'desc' property
-    const fullCoreTeam = coreTeam.find(coreTeam => coreTeam.id === item.id);
-    if (fullCoreTeam) {
-      setSelectedFounder(fullCoreTeam);
-    }
-  };
-
-  // Auto-play
   useEffect(() => {
     if (!isAutoPlaying) return;
-    const interval = setInterval(() => swipeToTestimonial(1), 6000);
-    return () => clearInterval(interval);
-  }, [isAutoPlaying]);
+    const timer = setInterval(() => {
+      handleNext();
+    }, 3000);
+    return () => clearInterval(timer);
+  }, [current, isAutoPlaying]);
+
+  const handleNext = () => {
+    setDirection(1);
+    setCurrent((prev) => (prev + 1) % members.length);
+  };
+
+  const handlePrev = () => {
+    setDirection(-1);
+    setCurrent((prev) => (prev - 1 + members.length) % members.length);
+  };
+
+  const handleCardClick = (index: number) => {
+    if (index === current) return;
+    setDirection(index > current ? 1 : -1);
+    setCurrent(index);
+  };
+
+  const getVisibleCards = () => {
+    const visible: { index: number; position: number }[] = [];
+    for (let i = -2; i <= 2; i++) {
+      const index = (current + i + members.length) % members.length;
+      visible.push({ index, position: i });
+    }
+    return visible;
+  };
+
+  const getCardStyle = (position: number) => {
+    const styles: Record<number, { scale: number; x: number; z: number; opacity: number; rotateY: number }> = {
+      0: { scale: 1.1, x: 0, z: 100, opacity: 1, rotateY: 0 },
+      1: { scale: 0.85, x: 280, z: 0, opacity: 0.7, rotateY: -25 },
+      [-1]: { scale: 0.85, x: -280, z: 0, opacity: 0.7, rotateY: 25 },
+      2: { scale: 0.7, x: 480, z: -50, opacity: 0.4, rotateY: -35 },
+      [-2]: { scale: 0.7, x: -480, z: -50, opacity: 0.4, rotateY: 35 }
+    };
+    return styles[position] || { scale: 0, x: 0, z: -100, opacity: 0, rotateY: 0 };
+  };
+
+  // Handle Founder click from AnimatedTooltip
+  const handleFounderClick = (item: TooltipItem) => { 
+    const fullFounder = founder.find(f => f.id === item.id); 
+    if (fullFounder) { 
+      setSelectedFounder(fullFounder as TeamMember); 
+    } 
+  };
+
+  // Handle Core Team click from AnimatedTooltip
+  const handleCoreTeamClick = (item: TooltipItem) => { 
+    const fullCoreTeam = coreTeam.find(c => c.id === item.id); 
+    if (fullCoreTeam) { 
+      setSelectedCoreTeam(fullCoreTeam as TeamMember); 
+    } 
+  };
 
   return (
     <section
@@ -140,89 +154,161 @@ const Members = () => {
         </motion.p>
       </motion.div>
 
-      {/* Carousel */}
-      <div className="relative flex items-start justify-center">
-        <AnimatePresence initial={false} custom={direction} mode="wait">
-          <motion.div
-            key={current}
-            custom={direction}
-            variants={testimonialVariants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            className="flex items-center justify-center"
-            onMouseEnter={() => setIsAutoPlaying(false)}
-            onMouseLeave={() => setIsAutoPlaying(true)}
-          >
-            <div className="bg-white/90 backdrop-blur-sm rounded-3xl shadow-xl 
-                p-8 md:p-12 max-w-2xl border border-green-100">
-              <img
-                src={members[current].image}
-                alt={members[current].name}
-                className="w-24 h-24 rounded-full object-cover border-4 border-green-300 shadow-lg mx-auto mb-6"
-              />
-              <div className="text-center space-y-1">
+      {/* Interactive 3D Carousel */}
+      <div className="relative h-[600px] flex items-center justify-center mb-8"
+           onMouseEnter={() => setIsAutoPlaying(false)}
+           onMouseLeave={() => setIsAutoPlaying(true)}>
+        
+        <div className="absolute inset-0 flex items-center justify-center perspective-[2000px]">
+          {getVisibleCards().map(({ index, position }) => {
+            const member = members[index];
+            const style = getCardStyle(position);
+            const isCenter = position === 0;
+            const isHovered = hoveredCard === index;
 
-                <h3 className="text-2xl font-bold text-green-800">
-                  {members[current].name}
-                </h3>
-                <p className="text-emerald-600 font-semibold">
-                  {members[current].designation}
-                </p>
-                <blockquote className="text-gray-700 text-lg italic">
-                  "{members[current].desc}"
-                </blockquote>
-              </div>
-              {/* Social Icons */}
-              <div className="flex justify-center space-x-4 mt-4">
-                <a href={members[current].linkedin || "#"} target="_blank" rel="noopener noreferrer" className="text-green-700 hover:text-green-900 transition-colors">
-                  <Linkedin size={24} />
-                </a>
-                <a href={members[current].github || "#"} target="_blank" rel="noopener noreferrer" className="text-green-700 hover:text-green-900 transition-colors">
-                  <Github size={24} />
-                </a>
-                <a href={members[current].instagram || "#"} target="_blank" rel="noopener noreferrer" className="text-green-700 hover:text-green-900 transition-colors">
-                  <Instagram size={24} />
-                </a>
-              </div>
-            </div>
-          </motion.div>
-        </AnimatePresence>
+            return (
+              <motion.div
+                key={index}
+                initial={false}
+                animate={{
+                  scale: isHovered && !isCenter ? style.scale * 1.05 : style.scale,
+                  x: style.x,
+                  z: style.z,
+                  opacity: style.opacity,
+                  rotateY: style.rotateY
+                }}
+                transition={{ duration: 0.5, ease: "easeInOut" }}
+                className="absolute cursor-pointer"
+                style={{ transformStyle: 'preserve-3d' as const }}
+                onClick={() => handleCardClick(index)}
+                onMouseEnter={() => setHoveredCard(index)}
+                onMouseLeave={() => setHoveredCard(null)}
+              >
+                <div className={`bg-white rounded-3xl shadow-2xl p-8 w-80 transition-all duration-300
+                  ${isCenter ? 'border-4 border-green-400' : 'border-2 border-green-200'}
+                  ${isHovered && !isCenter ? 'shadow-green-300/50' : ''}`}>
+                  
+                  <div className="relative mb-6">
+                    <motion.img
+                      src={member.image}
+                      alt={member.name}
+                      className={`w-32 h-32 rounded-full object-cover mx-auto border-4 
+                        ${isCenter ? 'border-green-400' : 'border-green-200'}`}
+                      animate={{
+                        scale: isHovered ? 1.1 : 1,
+                        rotate: isHovered ? 5 : 0
+                      }}
+                      transition={{ duration: 0.3 }}
+                    />
+                    {isCenter && (
+                      <motion.div
+                        className="absolute -top-2 -right-2 bg-green-500 text-white rounded-full w-12 h-12 flex items-center justify-center text-xs font-bold"
+                        initial={{ scale: 0, rotate: -180 }}
+                        animate={{ scale: 1, rotate: 0 }}
+                        transition={{ delay: 0.2, type: "spring" }}
+                      >
+                        TT
+                      </motion.div>
+                    )}
+                  </div>
+
+                  <div className="text-center space-y-3">
+                    <h3 className="text-2xl font-bold text-green-800">
+                      {member.name}
+                    </h3>
+                    <p className="text-emerald-600 font-semibold">
+                      {member.designation}
+                    </p>
+                    
+                    <AnimatePresence mode="wait">
+                      {(isCenter || isHovered) && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          <blockquote className="text-gray-800 italic text-sm mt-4">
+                            "{member.desc}"
+                          </blockquote>
+                          
+                          <div className="flex justify-center space-x-4 mt-6">
+                            <motion.a
+                              whileHover={{ scale: 1.2, rotate: 5 }}
+                              whileTap={{ scale: 0.9 }}
+                              href={member.linkedin || "#"}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-green-600 hover:text-green-800 transition-colors"
+                            >
+                              <Linkedin size={22} />
+                            </motion.a>
+                            <motion.a
+                              whileHover={{ scale: 1.2, rotate: -5 }}
+                              whileTap={{ scale: 0.9 }}
+                              href={member.github || "#"}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-green-600 hover:text-green-800 transition-colors"
+                            >
+                              <Github size={22} />
+                            </motion.a>
+                            <motion.a
+                              whileHover={{ scale: 1.2, rotate: 5 }}
+                              whileTap={{ scale: 0.9 }}
+                              href={member.instagram || "#"}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-green-600 hover:text-green-800 transition-colors"
+                            >
+                              <Instagram size={22} />
+                            </motion.a>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* Navigation Buttons */}
+        <motion.button
+          whileHover={{ scale: 1.1, x: -5 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={handlePrev}
+          className="absolute left-4 z-50 bg-white/90 backdrop-blur-sm p-4 rounded-full shadow-xl 
+            border-2 border-green-300 text-green-700 hover:bg-green-50 transition-colors"
+        >
+          <ChevronLeft size={28} />
+        </motion.button>
+        
+        <motion.button
+          whileHover={{ scale: 1.1, x: 5 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={handleNext}
+          className="absolute right-4 z-50 bg-white/90 backdrop-blur-sm p-4 rounded-full shadow-xl 
+            border-2 border-green-300 text-green-700 hover:bg-green-50 transition-colors"
+        >
+          <ChevronRight size={28} />
+        </motion.button>
       </div>
 
-      {/* Controls */}
-      <motion.div className="flex justify-center mt-8 space-x-6" initial={{ opacity: 0, y: -30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
-        viewport={{ once: true }}>
-        <button
-          onClick={() => swipeToTestimonial(-1)}
-          className="p-3 rounded-full bg-white border border-green-300 
-               shadow hover:bg-green-50 hover:shadow-lg 
-               transition-all duration-300 text-green-700"
-        >
-          <ChevronLeft />
-        </button>
-        <button
-          onClick={() => swipeToTestimonial(1)}
-          className="p-3 rounded-full bg-white border border-green-300 
-               shadow hover:bg-green-50 hover:shadow-lg 
-               transition-all duration-300 text-green-700"
-        >
-          <ChevronRight />
-        </button>
-      </motion.div>
-
       {/* Core Team  */}
-      <motion.div className="flex flex-row items-center justify-center mt-10 w-full" initial={{ opacity: 0, y: -30 }}
+      <motion.div 
+        className="flex flex-row items-center justify-center mt-10 w-full" 
+        initial={{ opacity: 0, y: -30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
-        viewport={{ once: true }}>
-
-        <span className="z-50 text-lg font-bold text-green-900 mr-5">Core Team:</span> <AnimatedTooltip items={coreTeam} onClick={handleCoreTeamClick} />
+        viewport={{ once: true }}
+      >
+        <span className="z-50 text-lg font-bold text-green-900 mr-5">Core Team:</span>
+        <AnimatedTooltip items={coreTeam as TooltipItem[]} onClick={handleCoreTeamClick} />
       </motion.div>
-      <AnimatePresence>
 
+      <AnimatePresence>
         {selectedCoreTeam && (
           <motion.div
             key={selectedCoreTeam.id}
@@ -262,32 +348,34 @@ const Members = () => {
               </blockquote>
               {/* Social Icons */}
               <div className="flex justify-center space-x-4 mt-4">
-                <a href={members[current].linkedin || "#"} target="_blank" rel="noopener noreferrer" className="text-green-700 hover:text-green-900 transition-colors">
+                <a href={selectedCoreTeam.linkedin || "#"} target="_blank" rel="noopener noreferrer" className="text-green-700 hover:text-green-900 transition-colors">
                   <Linkedin size={24} />
                 </a>
-                <a href={members[current].github || "#"} target="_blank" rel="noopener noreferrer" className="text-green-700 hover:text-green-900 transition-colors">
+                <a href={selectedCoreTeam.github || "#"} target="_blank" rel="noopener noreferrer" className="text-green-700 hover:text-green-900 transition-colors">
                   <Github size={24} />
                 </a>
-                <a href={members[current].instagram || "#"} target="_blank" rel="noopener noreferrer" className="text-green-700 hover:text-green-900 transition-colors">
+                <a href={selectedCoreTeam.instagram || "#"} target="_blank" rel="noopener noreferrer" className="text-green-700 hover:text-green-900 transition-colors">
                   <Instagram size={24} />
                 </a>
               </div>
             </div>
-
           </motion.div>
         )}
       </AnimatePresence>
 
       {/* Founders */}
-      <motion.div className="flex flex-row items-center justify-center mt-10 w-full" initial={{ opacity: 0, y: -30 }}
+      <motion.div 
+        className="flex flex-row items-center justify-center mt-10 w-full" 
+        initial={{ opacity: 0, y: -30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
-        viewport={{ once: true }}>
-
-        <span className="z-50 text-lg font-bold text-green-900 mr-5">Mind Behind This:</span> <AnimatedTooltip items={founder} onClick={handleFounderClick} />
+        viewport={{ once: true }}
+      >
+        <span className="text-lg font-bold text-green-900 mr-5">Mind Behind This:</span>
+        <AnimatedTooltip items={founder as TooltipItem[]} onClick={handleFounderClick} />
       </motion.div>
-      <AnimatePresence>
 
+      <AnimatePresence>
         {selectedFounder && (
           <motion.div
             key={selectedFounder.id}
@@ -327,13 +415,13 @@ const Members = () => {
               </blockquote>
               {/* Social Icons */}
               <div className="flex justify-center space-x-4 mt-4">
-                <a href={members[current].linkedin || "#"} target="_blank" rel="noopener noreferrer" className="text-green-700 hover:text-green-900 transition-colors">
+                <a href={selectedFounder.linkedin || "#"} target="_blank" rel="noopener noreferrer" className="text-green-700 hover:text-green-900 transition-colors">
                   <Linkedin size={24} />
                 </a>
-                <a href={members[current].github || "#"} target="_blank" rel="noopener noreferrer" className="text-green-700 hover:text-green-900 transition-colors">
+                <a href={selectedFounder.github || "#"} target="_blank" rel="noopener noreferrer" className="text-green-700 hover:text-green-900 transition-colors">
                   <Github size={24} />
                 </a>
-                <a href={members[current].instagram || "#"} target="_blank" rel="noopener noreferrer" className="text-green-700 hover:text-green-900 transition-colors">
+                <a href={selectedFounder.instagram || "#"} target="_blank" rel="noopener noreferrer" className="text-green-700 hover:text-green-900 transition-colors">
                   <Instagram size={24} />
                 </a>
               </div>
