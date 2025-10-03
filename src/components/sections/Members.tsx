@@ -49,6 +49,19 @@ const itemVariants: Variants = {
   },
 };
 
+const useIsMobile = (breakpoint = 768) => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < breakpoint);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, [breakpoint]);
+
+  return isMobile;
+};
+
 const Members = () => {
   const [current, setCurrent] = useState(2);
   // const [direction, setDirection] = useState(0);
@@ -56,6 +69,8 @@ const Members = () => {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const [selectedFounder, setSelectedFounder] = useState<TeamMember | null>(null);
   const [selectedCoreTeam, setSelectedCoreTeam] = useState<TeamMember | null>(null);
+  
+  const isMobile = useIsMobile(768);
 
   useEffect(() => {
     if (!isAutoPlaying) return;
@@ -87,31 +102,33 @@ const Members = () => {
     return visible;
   };
 
-  const getCardStyle = (position: number) => {
+   const getCardStyle = (position: number) => {
+    const xOffset = isMobile ? 120 : 280;
+    const farOffset = isMobile ? 200 : 480;
     const styles: Record<number, { scale: number; x: number; z: number; opacity: number; rotateY: number }> = {
-      0: { scale: 1.1, x: 0, z: 100, opacity: 1, rotateY: 0 },
-      1: { scale: 0.85, x: 280, z: 0, opacity: 0.7, rotateY: -25 },
-      [-1]: { scale: 0.85, x: -280, z: 0, opacity: 0.7, rotateY: 25 },
-      2: { scale: 0.7, x: 480, z: -50, opacity: 0.4, rotateY: -35 },
-      [-2]: { scale: 0.7, x: -480, z: -50, opacity: 0.4, rotateY: 35 }
+      0: { scale: 1.05, x: 0, z: 100, opacity: 1, rotateY: 0 },
+      1: { scale: 0.85, x: xOffset, z: 0, opacity: 0.7, rotateY: -20 },
+      [-1]: { scale: 0.85, x: -xOffset, z: 0, opacity: 0.7, rotateY: 20 },
+      2: { scale: 0.7, x: farOffset, z: -50, opacity: 0.4, rotateY: -30 },
+      [-2]: { scale: 0.7, x: -farOffset, z: -50, opacity: 0.4, rotateY: 30 }
     };
     return styles[position] || { scale: 0, x: 0, z: -100, opacity: 0, rotateY: 0 };
   };
 
   // Handle Founder click from AnimatedTooltip
-  const handleFounderClick = (item: TooltipItem) => { 
-    const fullFounder = founder.find(f => f.id === item.id); 
-    if (fullFounder) { 
-      setSelectedFounder(fullFounder as TeamMember); 
-    } 
+  const handleFounderClick = (item: TooltipItem) => {
+    const fullFounder = founder.find(f => f.id === item.id);
+    if (fullFounder) {
+      setSelectedFounder(fullFounder as TeamMember);
+    }
   };
 
   // Handle Core Team click from AnimatedTooltip
-  const handleCoreTeamClick = (item: TooltipItem) => { 
-    const fullCoreTeam = coreTeam.find(c => c.id === item.id); 
-    if (fullCoreTeam) { 
-      setSelectedCoreTeam(fullCoreTeam as TeamMember); 
-    } 
+  const handleCoreTeamClick = (item: TooltipItem) => {
+    const fullCoreTeam = coreTeam.find(c => c.id === item.id);
+    if (fullCoreTeam) {
+      setSelectedCoreTeam(fullCoreTeam as TeamMember);
+    }
   };
 
   return (
@@ -152,10 +169,10 @@ const Members = () => {
       </motion.div>
 
       {/* Interactive 3D Carousel */}
-      <div className="relative h-[600px] flex items-center justify-center mb-8"
-           onMouseEnter={() => setIsAutoPlaying(false)}
-           onMouseLeave={() => setIsAutoPlaying(true)}>
-        
+      <div className="relative h-[420px] sm:h-[480px] md:h-[600px] flex items-center justify-center mb-8 overflow-hidden"
+        onMouseEnter={() => setIsAutoPlaying(false)}
+        onMouseLeave={() => setIsAutoPlaying(true)}>
+
         <div className="absolute inset-0 flex items-center justify-center perspective-[2000px]">
           {getVisibleCards().map(({ index, position }) => {
             const member = members[index];
@@ -181,10 +198,10 @@ const Members = () => {
                 onMouseEnter={() => setHoveredCard(index)}
                 onMouseLeave={() => setHoveredCard(null)}
               >
-                <div className={`bg-white rounded-3xl shadow-2xl p-8 w-80 transition-all duration-300
+                <div className={`bg-white rounded-3xl shadow-2xl p-6 md:p-8 w-64 md:w-80 transition-all duration-300
                   ${isCenter ? 'border-4 border-green-400' : 'border-2 border-green-200'}
                   ${isHovered && !isCenter ? 'shadow-green-300/50' : ''}`}>
-                  
+
                   <div className="relative mb-6">
                     <motion.img
                       src={member.image}
@@ -216,7 +233,7 @@ const Members = () => {
                     <p className="text-emerald-600 font-semibold">
                       {member.designation}
                     </p>
-                    
+
                     <AnimatePresence mode="wait">
                       {(isCenter || isHovered) && (
                         <motion.div
@@ -228,7 +245,7 @@ const Members = () => {
                           <blockquote className="text-gray-800 italic text-sm mt-4">
                             "{member.desc}"
                           </blockquote>
-                          
+
                           <div className="flex justify-center space-x-4 mt-6">
                             <motion.a
                               whileHover={{ scale: 1.2, rotate: 5 }}
@@ -279,9 +296,9 @@ const Members = () => {
           className="absolute left-4 z-50 bg-white/90 backdrop-blur-sm p-4 rounded-full shadow-xl 
             border-2 border-green-300 text-green-700 hover:bg-green-50 transition-colors"
         >
-          <ChevronLeft size={28} />
+          <ChevronLeft size={isMobile ? 20 : 28} />
         </motion.button>
-        
+
         <motion.button
           whileHover={{ scale: 1.1, x: 5 }}
           whileTap={{ scale: 0.95 }}
@@ -289,13 +306,13 @@ const Members = () => {
           className="absolute right-4 z-50 bg-white/90 backdrop-blur-sm p-4 rounded-full shadow-xl 
             border-2 border-green-300 text-green-700 hover:bg-green-50 transition-colors"
         >
-          <ChevronRight size={28} />
+          <ChevronRight size={isMobile ? 20 : 28} />
         </motion.button>
       </div>
 
       {/* Core Team  */}
-      <motion.div 
-        className="flex flex-row items-center justify-center mt-10 w-full" 
+      <motion.div
+        className="flex flex-row items-center justify-center mt-10 w-full"
         initial={{ opacity: 0, y: -30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
@@ -361,8 +378,8 @@ const Members = () => {
       </AnimatePresence>
 
       {/* Founders */}
-      <motion.div 
-        className="flex flex-row items-center justify-center mt-10 w-full" 
+      <motion.div
+        className="flex flex-row items-center justify-center mt-10 w-full"
         initial={{ opacity: 0, y: -30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
