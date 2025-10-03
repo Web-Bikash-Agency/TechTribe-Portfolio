@@ -89,7 +89,7 @@ const FloatingTechLogos: React.FC<FloatingTechLogosProps> = ({ className = '' })
     delay,
     repeat: Infinity,
     repeatType: 'loop',
-    ease: [0.42, 0, 0.58, 1] // cubic-bezier for easeInOut
+    ease: [0.42, 0, 0.58, 1]
   };
 
   return {
@@ -108,7 +108,7 @@ const FloatingTechLogos: React.FC<FloatingTechLogosProps> = ({ className = '' })
           className={`absolute ${logo.size}`}
           style={{
             ...logo.position,
-            opacity: 0.8
+            opacity: 0.6
           }}
           animate={floatingAnimation(logo.duration, logo.delay)}
         >
