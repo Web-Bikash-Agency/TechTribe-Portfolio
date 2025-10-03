@@ -114,7 +114,7 @@ const Highlights = () => {
             className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-green-700 via-emerald-600 to-green-500 
             bg-clip-text text-transparent mb-6"
           >
-            Community Highlights
+            Why Join TechTribe?
           </motion.h2>
           <div className="w-24 h-1 bg-gradient-to-r from-green-400 to-emerald-400 mx-auto mb-8 rounded-full"></div>
           <motion.p
