@@ -279,7 +279,7 @@ const Highlights = () => {
           viewport={{ once: true }}
         >
           <motion.button
-            className="group inline-flex items-center gap-3 rounded-full border border-green-300 text-green-500 bg-green-50 px-7 py-4"
+            className="group inline-flex items-center gap-3 rounded-full border border-green-300 text-green-500 bg-green-50 px-7 py-4 cursor-not-allowed"
             whileHover={{
               scale: 1.05,
               boxShadow: "0 10px 25px -5px rgba(34, 197, 94, 0.2)",
