@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Rocket } from 'lucide-react';
 import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
-
+// import MagicBento from "../MagicBento";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 16 },
@@ -102,6 +102,7 @@ const Highlights = () => {
       id="highlights"
       
     >
+
       {/* Header Grid  */}
       <div className="container mx-auto px-4">
         <div className="mb-16 text-center">
@@ -126,7 +127,6 @@ const Highlights = () => {
             Discover the many ways TechTribe empowers developers to learn, grow, and make a difference
           </motion.p>
         </div>
-
         {/* Animated highlights grid */}
         <motion.div
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
