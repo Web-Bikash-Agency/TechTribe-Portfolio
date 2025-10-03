@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 // import { BackgroundBeams } from "../../animation/BackgroundBeams"
 import { Users } from "lucide-react"
 import { Rocket } from "lucide-react"
-import { Button } from "../../animation/MovingBorder";
 import { motion, AnimatePresence } from "framer-motion";
 import FloatingTechLogos from "../../animation/FloatingAnimation";
 // import DarkVeil from "../../animation/DarkVeil";
@@ -173,23 +172,19 @@ const Hero = () => {
                     <Users className="h-5 w-5 mr-3" /> Join Us
                   </motion.a>
 
-                  <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                    <Button
-                      onClick={() => {
-                        document.getElementById("highlights")?.scrollIntoView({
-                          behavior: "smooth",
-                          block: "start",
-                        });
-                      }}
-                      borderRadius="0.75rem"
-                      duration={4000}
-                      containerClassName="z-20"
-                      borderClassName="border border-green-400/30"
-                      className="px-6 py-3 bg-white text-gray-700 font-semibold hover:bg-green-50 hover:text-green-700 transition-all duration-200 shadow-sm hover:shadow-md cursor-pointer"
-                    >
-                      <Rocket className="h-5 w-5 mr-3" /> Explore
-                    </Button>
-                  </motion.div>
+                  <motion.a
+                    onClick={() => {
+                      document.getElementById("highlights")?.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start",
+                      });
+                    }}
+                    whileHover={{ scale: 1.02, boxShadow: "0 10px 25px -5px rgba(34, 197, 94, 0.2)" }}
+                    whileTap={{ scale: 0.98 }}
+                    className="flex items-center z-20 rounded-xl px-8 py-3 font-semibold bg-white text-gray-700 hover:bg-green-50 hover:text-green-700 transition-all duration-300 cursor-pointer shadow-lg hover:shadow-green-500/25"
+                  >
+                    <Rocket className="h-5 w-5 mr-3" /> Explore
+                  </motion.a>
                 </motion.div>
               </motion.div>
             )}
