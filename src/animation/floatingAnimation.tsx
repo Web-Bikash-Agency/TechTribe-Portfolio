@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import type { Transition } from 'framer-motion';
 
 interface FloatingTechLogosProps {
   className?: string;
@@ -70,20 +71,34 @@ const FloatingTechLogos: React.FC<FloatingTechLogosProps> = ({ className = '' })
       size: 'w-12 h-12',
       duration: 7,
       delay: 1.2
-    }
+    },
+    {
+      name: 'Discord',
+      icon: 'discord',
+      color: '#5865F2',
+      position: { top: '55%', right: '25%' },
+      size: 'w-12 h-12',
+      duration: 7,
+      delay: 1.2
+    },
   ];
 
-  const floatingAnimation = (duration: number, delay: number) => ({
+ const floatingAnimation = (duration: number, delay: number) => {
+  const transition: Transition = {
+    duration,
+    delay,
+    repeat: Infinity,
+    repeatType: 'loop',
+    ease: [0.42, 0, 0.58, 1] // cubic-bezier for easeInOut
+  };
+
+  return {
     y: [0, -20, 0],
     x: [0, 10, -10, 0],
     rotate: [0, 5, -5, 0],
-    transition: {
-      duration,
-      delay,
-      repeat: Infinity,
-      ease: 'easeInOut'
-    }
-  });
+    transition
+  };
+};
 
   return (
     <div className={`absolute inset-0 overflow-hidden pointer-events-none ${className}`}>
