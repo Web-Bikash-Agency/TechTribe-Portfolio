@@ -60,7 +60,7 @@ const Navbar = () => {
             items={navLinks}
             onItemClick={(item) => scrollToSection(item.link)}
           />
-          <a className="flex items-center gap-4"
+          <a className="flex items-center gap-4 "
             href=" https://chat.whatsapp.com/Kv9PQO8HwQlAJnlU0W9pIP?mode=ems_wa_t"
             target="_blank"
             rel="noopener noreferrer">
