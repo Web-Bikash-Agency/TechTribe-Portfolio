@@ -4,7 +4,7 @@ import { Users } from "lucide-react"
 import { Rocket } from "lucide-react"
 import { Button } from "../../animation/MovingBorder";
 import { motion, AnimatePresence } from "framer-motion";
-import FloatingTechLogos from "../../animation/floatingAnimation";
+import FloatingTechLogos from "../../animation/FloatingAnimation";
 // import DarkVeil from "../../animation/DarkVeil";
 import Particles from "../../animation/Particles";
 
@@ -163,6 +163,9 @@ const Hero = () => {
                   className="flex items-center justify-center gap-4 flex-wrap"
                 >
                   <motion.a
+                    href=" https://chat.whatsapp.com/Kv9PQO8HwQlAJnlU0W9pIP?mode=ems_wa_t"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     whileHover={{ scale: 1.02, boxShadow: "0 10px 25px -5px rgba(34, 197, 94, 0.2)" }}
                     whileTap={{ scale: 0.98 }}
                     className="flex items-center z-20 rounded-xl px-8 py-3 font-semibold bg-green-600 text-white hover:bg-green-700 transition-all duration-300 cursor-pointer shadow-lg hover:shadow-green-500/25"
@@ -172,13 +175,17 @@ const Hero = () => {
 
                   <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                     <Button
-                      as="a"
-                      href="#projects"
+                      onClick={() => {
+                        document.getElementById("highlights")?.scrollIntoView({
+                          behavior: "smooth",
+                          block: "start",
+                        });
+                      }}
                       borderRadius="0.75rem"
                       duration={4000}
                       containerClassName="z-20"
                       borderClassName="border border-green-400/30"
-                      className="px-6 py-3 bg-white text-gray-700 font-semibold hover:bg-green-50 hover:text-green-700 transition-all duration-200 shadow-sm hover:shadow-md"
+                      className="px-6 py-3 bg-white text-gray-700 font-semibold hover:bg-green-50 hover:text-green-700 transition-all duration-200 shadow-sm hover:shadow-md cursor-pointer"
                     >
                       <Rocket className="h-5 w-5 mr-3" /> Explore
                     </Button>
