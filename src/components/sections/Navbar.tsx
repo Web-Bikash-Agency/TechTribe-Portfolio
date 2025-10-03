@@ -1,5 +1,4 @@
 "use client";
-
 import { useState, useEffect } from "react";
 import {
   Navbar as BaseNavbar,
@@ -48,11 +47,10 @@ const Navbar = () => {
 
   return (
     <div
-      className={`fixed top-0 left-0 w-full z-50 transition-colors duration-300 ${
-        isScrolled
+      className={`fixed top-0 left-0 w-full z-50 transition-colors duration-300 ${isScrolled
           ? ""
           : "bg-transparent"
-      }`}
+        }`}
     >
       <BaseNavbar>
         {/* Desktop Navigation */}
@@ -62,9 +60,12 @@ const Navbar = () => {
             items={navLinks}
             onItemClick={(item) => scrollToSection(item.link)}
           />
-          <div className="flex items-center gap-4">
+          <a className="flex items-center gap-4"
+            href=" https://chat.whatsapp.com/Kv9PQO8HwQlAJnlU0W9pIP?mode=ems_wa_t"
+            target="_blank"
+            rel="noopener noreferrer">
             <NavbarButton variant="primary">Join Us</NavbarButton>
-          </div>
+          </a>
         </NavBody>
 
         {/* Mobile Navigation */}
