@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Users } from "lucide-react"
 import { Rocket } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion";
-import FloatingTechLogos from "../../animation/FloatingAnimation";
+import FloatingTechLogos from "../../animation/FloatingTechLogos";
 // import DarkVeil from "../../animation/DarkVeil";
 import Particles from "../../animation/Particles";
 
