@@ -1,30 +1,29 @@
-import React, { useState, useEffect } from "react"
-import { Menu, X } from "lucide-react"
-import { Button } from "../ui/button"
-import { motion } from "framer-motion"
+"use client";
 
-const fadeInLeft = {
-  hidden: { opacity: 0, x: -16 },
-  show: { opacity: 1, x: 0, transition: { duration: 0.5 } },
-};
-const fadeInRight = {
-  hidden: { opacity: 0, x: 16 },
-  show: { opacity: 1, x: 0, transition: { duration: 0.5 } },
-};
-
-
+import { useState, useEffect } from "react";
+import {
+  Navbar as BaseNavbar,
+  NavBody,
+  NavItems,
+  MobileNav,
+  NavbarLogo,
+  NavbarButton,
+  MobileNavHeader,
+  MobileNavToggle,
+  MobileNavMenu,
+} from "./resizable-navbar";
 
 const Navbar = () => {
-
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isOpen, setIsOpen] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { name: "Home", href: "#home" },
-    { name: "About", href: "#about" },
-    { name: "Highlights", href: "#highlights" },
-    { name: "Members", href: "#members" }
-  ]
+    { name: "Home", link: "#home" },
+    { name: "About", link: "#about" },
+    { name: "Highlights", link: "#highlights" },
+    { name: "Members", link: "#members" },
+  ];
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
@@ -32,109 +31,79 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
   const scrollToSection = (href: string) => {
-    
-    if (href === "/" || href === "#home"){
-      window.scrollTo({top: 0, behavior: "smooth"});
-      setIsOpen(false);
+    if (href === "/" || href === "#home") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      setIsMobileMenuOpen(false);
       return;
     }
 
     const element = document.querySelector(href);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
     }
-    setIsOpen(false);
+    setIsMobileMenuOpen(false);
   };
 
-  const handleLinkClick = (e:React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    scrollToSection(href);
-  }
-
   return (
-    <div className={`w-full border-b border-gray-200 bg-white sticky top-0 z-99 shadow-b shadow-green-300/30 ${
-        isScrolled ? "shadow-md shadow-green-300/30" : ""}`}>
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-5 sm:px-6 lg:px-8">
-        {/* Logo */}
-        <motion.a href="/"
-          variants={fadeInLeft}
-          initial="hidden"
-          animate="show"
-          onClick={(e) => handleLinkClick(e, "#home")}
-          className="text-3xl font-bold text-green-600">
-          {`</>`} TechTribe
-        </motion.a>
-
-        {/* Desktop Nav */}
-        <motion.div className="hidden md:flex justify-center items-center gap-8">
-          {navLinks.map((link) => (
-            <motion.a
-              variants={fadeInRight}
-              initial="hidden"
-              animate="show"
-              key={link.name}
-              href={link.href}
-              onClick={(e) => handleLinkClick(e, link.href)}
-              className="text-gray-700 hover:text-green-600 transition-colors"
-            >
-              {link.name}
-            </motion.a>
-          ))}
-          <motion.div
-            variants={fadeInRight}
-            initial="hidden"
-            animate="show"
-            className="hidden md:flex">
-            <Button
-
-              className=" bg-green-600
-              rounded-2xl 
-              px-6 py-2 
-              text-white 
-              transition-all 
-              duration-300 
-              hover:bg-white 
-              hover:text-green-600 
-              hover:scale-y-105
-              hover:inset-ring-2
-              hover:inset-ring-green-600 
-              hover:shadow-green/50  hover:shadow-lg cursor-pointer">Join Us</Button>
-          </motion.div>
-        </motion.div>
-
-        {/* Mobile Menu Button */}
-        <button
-          className="md:hidden"
-          onClick={() => setIsOpen(!isOpen)}
-          
-          aria-label="Toggle Menu"
-        >
-          {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" stroke="black"/>}
-        </button>
-      </nav>
-
-      {/* Mobile Nav  */}
-      {isOpen && (
-        <div className="md:hidden bg-white border-t boder-gray-200">
-          <div className="flex flex-col px-4 py-3 space-y-2">
-            {navLinks.map((link) => (
-              <motion.a
-                variants={fadeInRight}
-                initial="hidden"
-                animate="show"
-                href={link.href}
-                key={link.name}
-                onClick={(e) => handleLinkClick(e, link.href)}
-                className="text-gray-700 hover:text-green-600 transition-colors"
-              >{link.name}</motion.a>
-            ))}
-            <Button className="w-full bg-green-600 hover:bg-white hover:text-green-500 hover:inset-ring-2 hover:inset-ring-green-600">Join Us</Button>
+    <div
+      className={`fixed top-0 left-0 w-full z-50 transition-colors duration-300 ${
+        isScrolled
+          ? ""
+          : "bg-transparent"
+      }`}
+    >
+      <BaseNavbar>
+        {/* Desktop Navigation */}
+        <NavBody>
+          <NavbarLogo />
+          <NavItems
+            items={navLinks}
+            onItemClick={(item) => scrollToSection(item.link)}
+          />
+          <div className="flex items-center gap-4">
+            <NavbarButton variant="primary">Join Us</NavbarButton>
           </div>
-        </div>
-      )}
-    </div>
-  )
-}
+        </NavBody>
 
-export default Navbar
+        {/* Mobile Navigation */}
+        <MobileNav>
+          <MobileNavHeader>
+            <NavbarLogo />
+            <MobileNavToggle
+              isOpen={isMobileMenuOpen}
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            />
+          </MobileNavHeader>
+
+          <MobileNavMenu
+            isOpen={isMobileMenuOpen}
+            onClose={() => setIsMobileMenuOpen(false)}
+          >
+            {navLinks.map((item, idx) => (
+              <a
+                key={`mobile-link-${idx}`}
+                href={item.link}
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection(item.link);
+                }}
+                className="block w-full rounded-md px-4 py-2 text-lg text-neutral-600 hover:bg-gray-100 dark:text-neutral-300 dark:hover:bg-neutral-800"
+              >
+                {item.name}
+              </a>
+            ))}
+            <div className="flex w-full flex-col gap-4">
+              <NavbarButton variant="primary" className="w-full">
+                Join Us
+              </NavbarButton>
+            </div>
+          </MobileNavMenu>
+        </MobileNav>
+      </BaseNavbar>
+    </div>
+  );
+};
+
+export default Navbar;
