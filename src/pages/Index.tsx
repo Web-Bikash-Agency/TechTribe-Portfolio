@@ -4,10 +4,11 @@ import About from "../components/sections/About";
 import Highlights from "../components/sections/Highlights";
 import Members from "../components/sections/Members";
 import Footer from "../components/sections/Footer";
+import ClickSpark from "../components/ClickSpark"; // your ClickSpark component
 
 const Index = () => {
   return (
-    <div>
+    <ClickSpark sparkColor="#22c55e" sparkCount={10} sparkRadius={25}>
       <Navbar />
       <main>
         <section id="home">
@@ -24,7 +25,7 @@ const Index = () => {
         </section>
       </main>
       <Footer />
-    </div>
+    </ClickSpark>
   );
 };
 
