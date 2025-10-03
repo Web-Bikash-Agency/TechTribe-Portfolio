@@ -1,13 +1,18 @@
 import { useState, useEffect } from "react";
-import { BackgroundBeams } from "../../animation/BackgroundBeams"
+// import { BackgroundBeams } from "../../animation/BackgroundBeams"
 import { Users } from "lucide-react"
 import { Rocket } from "lucide-react"
 import { Button } from "../../animation/MovingBorder";
 import { motion, AnimatePresence } from "framer-motion";
+import FloatingTechLogos from "../../animation/floatingAnimation";
+// import DarkVeil from "../../animation/DarkVeil";
+import Particles from "../../animation/Particles";
+
 
 const Hero = () => {
   const [animationStage, setAnimationStage] = useState(0);
   const [hideIndicator, setHideIndicator] = useState(false);
+
 
   useEffect(() => {
     // Smoother timing sequence
@@ -29,8 +34,23 @@ const Hero = () => {
   }, []);
 
   return (
-    <div className="relative overflow-hidden border-b border-gray-200 bg-gray-50 h-screen flex flex-col items-center justify-center
- ">
+    <div className="relative overflow-hidden border-b border-gray-200 bg-gray-50 h-screen flex flex-col items-center justify-center">
+      <div className="relative w-full">
+
+      </div>
+      <div className="absolute inset-0 w-full h-full">
+        <Particles
+          particleColors={['#19F550', '#19F550', '#19F550']}
+          particleCount={100}
+          particleSpread={10}
+          speed={0.1}
+          particleBaseSize={100}
+          moveParticlesOnHover={true}
+          alphaParticles={false}
+          disableRotation={false}
+        />
+      </div>
+      <FloatingTechLogos />
       {/* Background Blurs - Smoother animations */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden>
         {/* Top Right Blob */}
@@ -39,7 +59,7 @@ const Hero = () => {
           initial={{ scale: 0.8, opacity: 0, backgroundColor: "rgba(134,239,172,0.2)" }}
           animate={{
             scale: [0.8, 1, 1.1, 1.05, 1],
-            opacity: [0, 0.4, 0.7, 0.6, 0.5],
+            opacity: [0, 0.4, 0.8, 0.6, 0.5],
             backgroundColor: [
               "rgba(134,239,172,0.2)",
               "rgba(104,219,152,0.3)",
@@ -62,7 +82,7 @@ const Hero = () => {
           initial={{ scale: 0.9, opacity: 0, backgroundColor: "rgba(34,197,94,0.15)" }}
           animate={{
             scale: [0.9, 1.05, 1.2, 1.1, 1],
-            opacity: [0, 0.3, 0.6, 0.5, 0.4],
+            opacity: [0, 0.4, 0.8, 0.6, 0.5],
             backgroundColor: [
               "rgba(34,197,94,0.15)",
               "rgba(29,177,84,0.25)",
@@ -80,36 +100,6 @@ const Hero = () => {
           }}
         />
 
-        {/* Additional subtle elements */}
-        <motion.div
-          className="absolute top-1/4 left-1/4 h-48 w-48 rounded-full blur-3xl"
-          initial={{ opacity: 0, scale: 0.5, backgroundColor: "rgba(74,222,128,0.08)" }}
-          animate={{
-            scale: [0.5, 0.8, 1, 0.9, 0.8],
-            opacity: [0, 0.1, 0.2, 0.15, 0.1],
-          }}
-          transition={{
-            duration: 16,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1.5,
-          }}
-        />
-
-        <motion.div
-          className="absolute bottom-1/3 right-1/3 h-32 w-32 rounded-full blur-3xl"
-          initial={{ opacity: 0, scale: 0.6, backgroundColor: "rgba(163,230,53,0.04)" }}
-          animate={{
-            scale: [0.6, 0.9, 1.1, 0.95, 0.8],
-            opacity: [0, 0.05, 0.12, 0.08, 0.06],
-          }}
-          transition={{
-            duration: 18,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 4,
-          }}
-        />
       </div>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
@@ -375,7 +365,7 @@ const Hero = () => {
         )}
       </AnimatePresence>
 
-      <BackgroundBeams />
+
     </div>
   );
 }
