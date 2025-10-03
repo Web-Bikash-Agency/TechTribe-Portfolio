@@ -252,7 +252,8 @@ const About = () => {
             }}
             viewport={{ once: true }}
             className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-8 py-3 
-              rounded-full font-semibold shadow-lg transition-all duration-300"
+              rounded-full font-semibold shadow-lg transition-all duration-300 cursor-not-allowed"
+              
           >
             Join Our Community
           </motion.button>
