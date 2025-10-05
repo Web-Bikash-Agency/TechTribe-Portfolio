@@ -33,13 +33,17 @@ const Hero = () => {
   }, []);
 
   return (
-    <div className="relative overflow-hidden border-b border-gray-200 bg-gray-50 h-screen flex flex-col items-center justify-center">
+    <div className="relative overflow-hidden border-b border-gray-200 bg-gray-50 h-screen flex flex-col items-center justify-center"
+    style={{
+            // background: " linear-gradient(135deg, #f8fafc 0%, #d1fae5 50%, #10b981 100%)"
+            background: " linear-gradient(145deg, #ffffff 0%, #d1fae5 70%, #10b981 100%)"
+          }}>
       <div className="relative w-full">
 
       </div>
       <div className="absolute inset-0 w-full h-full">
         <Particles
-          particleColors={['#19F550', '#19F550', '#19F550']}
+          particleColors={['#7FFFD4', '#60FFF9', '#66FCF1', '#8FFFE1', '#A8FFEC']}
           particleCount={100}
           particleSpread={10}
           speed={0.1}
@@ -49,57 +53,7 @@ const Hero = () => {
           disableRotation={false}
         />
       </div>
-      <FloatingTechLogos />
-      {/* Background Blurs - Smoother animations */}
-      <div className="absolute inset-0 pointer-events-none" aria-hidden>
-        {/* Top Right Blob */}
-        <motion.div
-          className="absolute -top-24 -right-24 h-72 w-72 rounded-full blur-3xl"
-          initial={{ scale: 0.8, opacity: 0, backgroundColor: "rgba(134,239,172,0.2)" }}
-          animate={{
-            scale: [0.8, 1, 1.1, 1.05, 1],
-            opacity: [0, 0.4, 0.8, 0.6, 0.5],
-            backgroundColor: [
-              "rgba(134,239,172,0.2)",
-              "rgba(104,219,152,0.3)",
-              "rgba(74,199,132,0.4)",
-              "rgba(104,219,152,0.3)",
-              "rgba(134,239,172,0.25)",
-            ],
-          }}
-          transition={{
-            duration: 12,
-            repeat: Infinity,
-            ease: [0.4, 0, 0.6, 1],
-            times: [0, 0.2, 0.5, 0.8, 1],
-          }}
-        />
-
-        {/* Bottom Left Blob */}
-        <motion.div
-          className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full blur-3xl"
-          initial={{ scale: 0.9, opacity: 0, backgroundColor: "rgba(34,197,94,0.15)" }}
-          animate={{
-            scale: [0.9, 1.05, 1.2, 1.1, 1],
-            opacity: [0, 0.4, 0.8, 0.6, 0.5],
-            backgroundColor: [
-              "rgba(34,197,94,0.15)",
-              "rgba(29,177,84,0.25)",
-              "rgba(24,157,74,0.35)",
-              "rgba(29,177,84,0.25)",
-              "rgba(34,197,94,0.2)",
-            ],
-          }}
-          transition={{
-            duration: 14,
-            repeat: Infinity,
-            ease: [0.4, 0, 0.6, 1],
-            delay: 3,
-            times: [0, 0.2, 0.5, 0.8, 1],
-          }}
-        />
-
-      </div>
+      <FloatingTechLogos/>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="relative flex flex-col items-center justify-center h-full">
