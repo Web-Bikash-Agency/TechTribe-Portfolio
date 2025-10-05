@@ -1,8 +1,12 @@
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
 import CountUp from "../../animation/CountUp";
+import { Rocket } from "../ui/Rocket";
+import { Globe } from "../ui/Globe";
+import { HeartHandshake } from "../ui/HeartHandshake"
+import type { ReactElement } from "react";
 
-type StatColor = "green" | "blue" | "purple" | "orange";
+type StatColor = "green" | "blue" | "purple" | "orange" | "cyan";
 
 const colorClasses: Record<StatColor, { text: string; card: string }> = {
   green: {
@@ -20,9 +24,25 @@ const colorClasses: Record<StatColor, { text: string; card: string }> = {
   orange: {
     text: "bg-gradient-to-r from-orange-600 to-orange-500",
     card: "bg-gradient-to-br from-white/80 to-orange-50/60"
+  },
+  cyan: {
+    text: "bg-gradient-to-r from-teal-500 to-cyan-500",
+    card: "bg-gradient-to-br from-white/80 to-cyan-50/60"
   }
 };
 
+const shadowColors: Record<StatColor, string> = {
+  green: "shadow-green-400/20 hover:shadow-green-400/40",
+  blue: "shadow-blue-400/20 hover:shadow-blue-400/40",
+  purple: "shadow-purple-400/20 hover:shadow-purple-400/40",
+  orange: "shadow-orange-400/20 hover:shadow-orange-400/40",
+  cyan: "shadow-cyan-400/20 hover:shadow-cyan-400/40",
+};
+
+const fadeIn = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+};
 // Animation variants for better performance and smoother transitions
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -70,29 +90,89 @@ const cardHoverVariants: Variants = {
 };
 
 const TechSupportCard = () => {
-  const color: StatColor = "purple";
+  // const color: StatColor = "purple";
 
   return (
     <motion.div
-      variants={itemVariants}
-      initial="hidden"
-      whileInView="show"
-      whileHover="hover"
-      viewport={{ once: true, margin: "-50px" }}
-      className={`text-center p-6 ${colorClasses[color].card} 
-        rounded-2xl backdrop-blur-md shadow-lg hover:shadow-xl transition-shadow duration-300`}
+      initial={{ opacity: 0, scale: 0.9, y: 20 }}
+      whileInView={{ opacity: 1, scale: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, type: "spring", stiffness: 120 }}
+      className="col-span-2 relative"
     >
       <motion.div
-        variants={cardHoverVariants}
-        className="flex items-baseline justify-center text-3xl font-bold mb-2"
+        whileHover={{ scale: 1.04, y: -6 }}
+        transition={{ type: "spring", stiffness: 300, damping: 18 }}
+        className="relative overflow-hidden bg-gradient-to-br from-white/80 to-purple-50/60 
+          backdrop-blur-xl rounded-3xl p-8 shadow-lg shadow-purple-300/30 
+          hover:shadow-purple-400/40 transition-all duration-300"
       >
-        <CountUp
-          to={24}
-          className={`${colorClasses[color].text} bg-clip-text text-transparent`}
+        {/* Animated scan line */}
+        <motion.div
+          className="absolute left-0 w-full h-1 bg-gradient-to-r 
+            from-transparent via-purple-400 to-transparent opacity-50"
+          animate={{ top: ["-20%", "120%"] }}
+          transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
         />
-        <span className={`${colorClasses[color].text} bg-clip-text text-transparent`}>/7</span>
+
+        {/* Content */}
+        <div className="relative z-10 text-center">
+          <div className="flex items-center justify-center gap-3 mb-3">
+            {/* Pulsing Dot */}
+            <motion.div
+              animate={{ scale: [1, 1.3, 1] }}
+              transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+              className="w-3 h-3 bg-green-400 rounded-full shadow-lg shadow-green-400/50"
+            />
+
+            {/* Count */}
+            <div className="flex items-baseline">
+              <CountUp
+                to={24}
+                className="text-4xl font-black bg-gradient-to-r from-purple-600 to-purple-500 
+                  bg-clip-text text-transparent"
+              />
+              <span className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-purple-500 
+                bg-clip-text text-transparent ml-1">
+                /7
+              </span>
+            </div>
+          </div>
+
+          <div className="text-gray-500 font-semibold text-lg tracking-wide">
+            Tech Support Available
+          </div>
+        </div>
       </motion.div>
-      <div className="text-sm font-medium text-gray-700">Tech Support</div>
+    </motion.div>
+  );
+};
+
+const FeatureCard = ({ title, description, icon, delay }: { title: string; description: string; icon: ReactElement; delay: number }) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: -50 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay, duration: 0.6 }}
+      whileHover={{ x: 10 }}
+      className="flex gap-4 group"
+    >
+      <motion.div
+        whileHover={{ scale: 1.2 }}
+        transition={{ duration: 0.6, type: "spring" }}
+        className="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center text-2xl shadow-lg shadow-emerald-500/30 group-hover:shadow-emerald-500/50"
+      >
+        {icon}
+      </motion.div>
+      <div className="flex-1">
+        <h3 className="text-xl font-bold text-gray-500 mb-2 group-hover:text-emerald-400 transition-colors">
+          {title}
+        </h3>
+        <p className="text-gray-400 leading-relaxed">
+          {description}
+        </p>
+      </div>
     </motion.div>
   );
 };
@@ -100,13 +180,35 @@ const TechSupportCard = () => {
 const About = () => {
   const statsData = [
     { value: 100, label: "Community Members", color: "green" },
-    { value: 10, label: "Professional Speakers", color: "blue" },
-    { value: 5, label: "Events Completed", color: "orange" }
+    { value: 20, label: "Mentors", color: "blue" },
+    { value: 10, label: "Events Completed", color: "orange" },
+    { value: 5, label: "Collaboration", color: "cyan" }
+  ];
+  const features = [
+    {
+      icon: <Rocket />,
+      title: "Growth Through Collaboration",
+      description: "Whether you're a beginner or professional, collaborate with developers worldwide to accelerate your learning journey."
+    },
+    {
+      icon: <Globe />,
+      title: "Innovation Hub",
+      description: "From hackathons to open-source contributions, we create spaces where creative ideas transform into reality."
+    },
+    {
+      icon: <HeartHandshake />,
+      title: "Meaningful Connections",
+      description: "Build lasting relationships with like-minded tech enthusiasts who share your passion for continuous learning."
+    }
   ];
 
   return (
     <section
       id="about"
+      style={{
+        // background: "linear-gradient(145deg, #ffffff 0%, #e0f7eb 70%, #6ee7b7 100%)"
+        background: "linear-gradient(145deg, #98f5cb  0%, #e0f7eb 30%, #ffffff 100%)"
+      }}
       className="bg-gradient-to-br from-slate-50 via-green-50 to-green-100 py-20 px-6 md:px-20"
     >
       <div className="max-w-6xl mx-auto">
@@ -115,29 +217,47 @@ const About = () => {
           variants={itemVariants}
           className="text-center mb-16"
         >
-          <motion.h2
-            className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-green-700 via-emerald-600 to-green-500 
-              bg-clip-text text-transparent mb-6"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{
-              type: "spring",
-              damping: 15,
-              stiffness: 100,
-              duration: 0.8
-            }}
+          <motion.div
+            initial={{ scale: 0 }}
+            whileInView={{ scale: 1 }}
             viewport={{ once: true }}
+            transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+            className="inline-block px-6 py-2 bg-emerald-500/10 border border-emerald-500/30 rounded-full mb-6"
           >
-            About Our Community
+            <span className="text-emerald-400 font-semibold tracking-wider uppercase text-sm">
+              Our Community
+            </span>
+          </motion.div>
+          <motion.h2
+            variants={fadeIn}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="text-5xl md:text-7xl font-bold mb-6"
+          >
+            <span className="bg-gradient-to-r from-green-600 via-emerald-500 to-teal-600 bg-clip-text text-transparent">
+              About Our Community
+            </span>
           </motion.h2>
 
           <motion.div
-            className="w-24 h-1 bg-gradient-to-r from-green-400 to-emerald-400 mx-auto mb-8 rounded-full"
-            initial={{ width: 0 }}
-            whileInView={{ width: 96 }}
-            transition={{ delay: 0.3, duration: 0.6, ease: "easeOut" }}
+            className="flex justify-center gap-2 mb-8"
+            variants={fadeIn}
+            initial="hidden"
+            whileInView="show"
             viewport={{ once: true }}
-          />
+          >
+            {[...Array(3)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="w-16 h-1 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full"
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1, duration: 0.5 }}
+              />
+            ))}
+          </motion.div>
 
           <motion.p
             className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
@@ -146,47 +266,37 @@ const About = () => {
             transition={{ delay: 0.5, duration: 0.8 }}
             viewport={{ once: true }}
           >
-            A vibrant space where curiosity meets collaboration
+            A vibrant ecosystem of developers, learners, and innovators building the future together
           </motion.p>
         </motion.div>
 
         {/* Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Text Content */}
-          <motion.div
-            variants={itemVariants}
-            className="space-y-8"
-          >
+          {/* Text Content - Left Grid*/}
+          <div className="space-y-8">
             <motion.div
-              className="space-y-6"
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{
-                staggerChildren: 0.15,
-                duration: 0.7
-              }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
+              className="bg-transparent backdrop-blur-xl rounded-3xl p-8 border border-emerald-700/20 shadow-lg"
             >
-              {[
-                "Welcome to our community—a vibrant space where curiosity meets collaboration! Developers, learners, and tech enthusiasts from around the world come together to share knowledge, solve challenges, and inspire each other.",
-                "We believe in growth through collaboration: whether you're a beginner exploring new ideas, a student honing your skills, or a professional looking to give back, there's a place for you here.",
-                "From hackathons and coding discussions to open-source contributions and learning sessions, our community thrives on creativity, support, and innovation."
-              ].map((text, index) => (
-                <motion.p
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 + 0.3, duration: 0.6 }}
-                  viewport={{ once: true }}
-                  className="text-lg md:text-xl text-gray-700 leading-relaxed"
-                >
-                  {text}
-                </motion.p>
-              ))}
-            </motion.div>
-          </motion.div>
+              <p className="text-lg text-gray-700 leading-relaxed mb-8">
+                Welcome to a space where <span className="text-emerald-400 font-semibold">curiosity drives innovation</span> and <span className="text-emerald-400 font-semibold">collaboration fuels growth</span>. Connect with developers and tech enthusiasts from around the globe who share your passion for learning and creating.
+              </p>
 
-          {/* Stats Grid */}
+              <div className="space-y-6">
+                {features.map((feature, index) => (
+                  <FeatureCard
+                    key={feature.title}
+                    {...feature}
+                    delay={index * 0.2}
+                  />
+                ))}
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Stats Grid - Right Grid*/}
           <motion.div
             variants={containerVariants}
             initial="hidden"
@@ -203,7 +313,7 @@ const About = () => {
                   custom={index}
                   whileHover="hover"
                   className={`text-center p-6 ${colorClasses[color].card} 
-                    rounded-2xl backdrop-blur-md shadow-lg hover:shadow-xl transition-shadow duration-300`}
+                    rounded-2xl backdrop-blur-md shadow-lg ${shadowColors[color]} transition-shadow duration-300`}
                 >
                   <motion.div
                     className="flex items-baseline justify-center text-3xl font-bold mb-2"
@@ -253,7 +363,7 @@ const About = () => {
             viewport={{ once: true }}
             className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-8 py-3 
               rounded-full font-semibold shadow-lg transition-all duration-300 cursor-not-allowed"
-              
+
           >
             Join Our Community
           </motion.button>
