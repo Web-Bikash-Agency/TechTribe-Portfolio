@@ -30,6 +30,11 @@ interface TooltipItem {
   instagram?: string;
 }
 
+const fadeIn = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+};
+
 // Parent container
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -64,7 +69,7 @@ const useIsMobile = (breakpoint = 768) => {
 
 const Members = () => {
   const [current, setCurrent] = useState(2);
-  // const [direction, setDirection] = useState(0);
+  const [direction, setDirection] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const [selectedFounder, setSelectedFounder] = useState<TeamMember | null>(null);
@@ -131,9 +136,31 @@ const Members = () => {
     }
   };
 
+  const slideVariants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? 300 : -300,
+      opacity: 0,
+      scale: 0.8
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+      scale: 1
+    },
+    exit: (direction: number) => ({
+      x: direction < 0 ? 300 : -300,
+      opacity: 0,
+      scale: 0.8
+    })
+  };
+
   return (
     <section
       id="members"
+       style={{
+  // background: "linear-gradient(145deg, #ffffff 0%, #e0f7eb 70%, #6ee7b7 100%)"
+  background: "linear-gradient(145deg, #98f5cb  0%, #e0f7eb 30%, #ffffff 100%)"
+}}
       className="py-20 md:py-28 bg-gradient-to-br from-slate-50 via-green-50 to-green-100 relative"
     >
       {/* Heading */}
@@ -145,17 +172,35 @@ const Members = () => {
         className="text-center mb-16"
       >
         <motion.h2
-          variants={itemVariants}
-          initial={{ opacity: 0, y: -30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
-          className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-green-700 via-emerald-600 to-green-500 
-            bg-clip-text text-transparent mb-6"
-        >
-          Team Members
-        </motion.h2>
-        <div className="w-24 h-1 bg-gradient-to-r from-green-400 to-emerald-400 mx-auto mb-8 rounded-full"></div>
+                   variants={fadeIn}
+                   initial="hidden"
+                   whileInView="show"
+                   viewport={{ once: true }}
+                   className="text-5xl md:text-7xl font-bold mb-6"
+                 >
+                   <span className="bg-gradient-to-r from-green-600 via-emerald-500 to-teal-600 bg-clip-text text-transparent">
+                     The Team Members
+                   </span>
+                 </motion.h2>
+         <motion.div
+                    className="flex justify-center gap-2 mb-8"
+                    variants={fadeIn}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: true }}
+                  >
+                    {[...Array(3)].map((_, i) => (
+                      <motion.div
+                        key={i}
+                        className="w-16 h-1 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full"
+                        initial={{ scaleX: 0 }}
+                        whileInView={{ scaleX: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: i * 0.1, duration: 0.5 }}
+                      />
+                    ))}
+                  </motion.div>
+        {/* <div className="w-24 h-1 bg-gradient-to-r from-green-400 to-emerald-400 mx-auto mb-8 rounded-full"></div> */}
         <motion.p
           variants={itemVariants}
           initial={{ opacity: 0, y: 20 }}
@@ -169,132 +214,236 @@ const Members = () => {
       </motion.div>
 
       {/* Interactive 3D Carousel */}
-      <div className="relative h-[420px] sm:h-[480px] md:h-[600px] flex items-center justify-center mb-8 overflow-hidden"
+      <div 
+        className={`relative ${isMobile ? 'h-[580px]' : 'h-[600px]'} flex items-center justify-center mb-8 overflow-hidden px-4`}
         onMouseEnter={() => setIsAutoPlaying(false)}
-        onMouseLeave={() => setIsAutoPlaying(true)}>
-
-        <div className="absolute inset-0 flex items-center justify-center perspective-[2000px]">
-          {getVisibleCards().map(({ index, position }) => {
-            const member = members[index];
-            const style = getCardStyle(position);
-            const isCenter = position === 0;
-            const isHovered = hoveredCard === index;
-
-            return (
+        onMouseLeave={() => setIsAutoPlaying(true)}
+      >
+        {isMobile ? (
+          // Mobile: Single card with slide animation
+          <div className="relative w-full max-w-sm mx-auto h-full flex items-center">
+            <AnimatePresence initial={false} custom={direction} mode="wait">
               <motion.div
-                key={index}
-                initial={false}
-                animate={{
-                  scale: isHovered && !isCenter ? style.scale * 1.05 : style.scale,
-                  x: style.x,
-                  z: style.z,
-                  opacity: style.opacity,
-                  rotateY: style.rotateY
+                key={current}
+                custom={direction}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{
+                  x: { type: "spring", stiffness: 300, damping: 30 },
+                  opacity: { duration: 0.3 },
+                  scale: { duration: 0.3 }
                 }}
-                transition={{ duration: 0.5, ease: "easeInOut" }}
-                className="absolute cursor-pointer"
-                style={{ transformStyle: 'preserve-3d' as const }}
-                onClick={() => handleCardClick(index)}
-                onMouseEnter={() => setHoveredCard(index)}
-                onMouseLeave={() => setHoveredCard(null)}
+                className="absolute w-full"
               >
-                <div className={`bg-white rounded-3xl shadow-2xl p-6 md:p-8 w-64 md:w-80 transition-all duration-300
-                  ${isCenter ? 'border-4 border-green-400' : 'border-2 border-green-200'}
-                  ${isHovered && !isCenter ? 'shadow-green-300/50' : ''}`}>
-
+                <div className="bg-white rounded-3xl shadow-2xl p-6 border-4 border-green-400 mx-auto">
                   <div className="relative mb-6">
-                    <motion.img
-                      src={member.image}
-                      alt={member.name}
-                      className={`w-32 h-32 rounded-full object-cover mx-auto border-4 
-                        ${isCenter ? 'border-green-400' : 'border-green-200'}`}
-                      animate={{
-                        scale: isHovered ? 1.1 : 1,
-                        rotate: isHovered ? 5 : 0
-                      }}
-                      transition={{ duration: 0.3 }}
+                    <img
+                      src={members[current].image}
+                      alt={members[current].name}
+                      className="w-32 h-32 rounded-full object-cover mx-auto border-4 border-green-400"
                     />
-                    {isCenter && (
-                      <motion.div
-                        className="absolute -top-2 -right-2 bg-green-500 text-white rounded-full w-12 h-12 flex items-center justify-center text-xs font-bold"
-                        initial={{ scale: 0, rotate: -180 }}
-                        animate={{ scale: 1, rotate: 0 }}
-                        transition={{ delay: 0.2, type: "spring" }}
-                      >
-                        TT
-                      </motion.div>
-                    )}
+                    <div className="absolute -top-2 -right-2 bg-green-500 text-white rounded-full w-12 h-12 flex items-center justify-center text-xs font-bold">
+                      <img src="/TechTribe-BrightLOGO.png" alt="Logo" className="rounded-4xl"/>
+                    </div>
                   </div>
 
                   <div className="text-center space-y-3">
                     <h3 className="text-2xl font-bold text-green-800">
-                      {member.name}
+                      {members[current].name}
                     </h3>
                     <p className="text-emerald-600 font-semibold">
-                      {member.designation}
+                      {members[current].designation}
                     </p>
+                    {/* <p className="text-gray-500 text-sm">
+                      {members[current].role}
+                    </p> */}
 
-                    <AnimatePresence mode="wait">
-                      {(isCenter || isHovered) && (
-                        <motion.div
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: "auto" }}
-                          exit={{ opacity: 0, height: 0 }}
-                          transition={{ duration: 0.3 }}
-                        >
-                          <blockquote className="text-gray-800 italic text-sm mt-4">
-                            "{member.desc}"
-                          </blockquote>
+                    <blockquote className="text-gray-800 italic text-sm mt-4 px-2">
+                      "{members[current].desc}"
+                    </blockquote>
 
-                          <div className="flex justify-center space-x-4 mt-6">
-                            <motion.a
-                              whileHover={{ scale: 1.2, rotate: 5 }}
-                              whileTap={{ scale: 0.9 }}
-                              href={member.linkedin || "#"}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-green-600 hover:text-green-800 transition-colors"
-                            >
-                              <Linkedin size={22} />
-                            </motion.a>
-                            <motion.a
-                              whileHover={{ scale: 1.2, rotate: -5 }}
-                              whileTap={{ scale: 0.9 }}
-                              href={member.github || "#"}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-green-600 hover:text-green-800 transition-colors"
-                            >
-                              <Github size={22} />
-                            </motion.a>
-                            <motion.a
-                              whileHover={{ scale: 1.2, rotate: 5 }}
-                              whileTap={{ scale: 0.9 }}
-                              href={member.instagram || "#"}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-green-600 hover:text-green-800 transition-colors"
-                            >
-                              <Instagram size={22} />
-                            </motion.a>
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
+                    <div className="flex justify-center space-x-4 mt-6">
+                      <motion.a
+                        whileHover={{ scale: 1.2, rotate: 5 }}
+                        whileTap={{ scale: 0.9 }}
+                        href={members[current].linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-green-600 hover:text-green-800 transition-colors"
+                      >
+                        <Linkedin size={22} />
+                      </motion.a>
+                      <motion.a
+                        whileHover={{ scale: 1.2, rotate: -5 }}
+                        whileTap={{ scale: 0.9 }}
+                        href={members[current].github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-green-600 hover:text-green-800 transition-colors"
+                      >
+                        <Github size={22} />
+                      </motion.a>
+                      <motion.a
+                        whileHover={{ scale: 1.2, rotate: 5 }}
+                        whileTap={{ scale: 0.9 }}
+                        href={members[current].instagram}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-green-600 hover:text-green-800 transition-colors"
+                      >
+                        <Instagram size={22} />
+                      </motion.a>
+                    </div>
                   </div>
                 </div>
               </motion.div>
-            );
-          })}
-        </div>
+            </AnimatePresence>
+
+            {/* Mobile Dots Indicator */}
+            <div className="absolute -bottom-8 left-0 right-0 flex justify-center gap-2">
+              {members.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => {
+                    setDirection(index > current ? 1 : -1);
+                    setCurrent(index);
+                  }}
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    index === current 
+                      ? 'w-8 bg-green-500' 
+                      : 'w-2 bg-green-300'
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+        ) : (
+          // Desktop: 3D Carousel
+          <div className="absolute inset-0 flex items-center justify-center perspective-[2000px]">
+            {getVisibleCards().map(({ index, position }) => {
+              const member = members[index];
+              const style = getCardStyle(position);
+              const isCenter = position === 0;
+              const isHovered = hoveredCard === index;
+
+              return (
+                <motion.div
+                  key={index}
+                  initial={false}
+                  animate={{
+                    scale: isHovered && !isCenter ? style.scale * 1.05 : style.scale,
+                    x: style.x,
+                    z: style.z,
+                    opacity: style.opacity,
+                    rotateY: style.rotateY
+                  }}
+                  transition={{ duration: 0.5, ease: "easeInOut" }}
+                  className="absolute cursor-pointer"
+                  style={{ transformStyle: 'preserve-3d' }}
+                  onClick={() => handleCardClick(index)}
+                  onMouseEnter={() => setHoveredCard(index)}
+                  onMouseLeave={() => setHoveredCard(null)}
+                >
+                  <div className={`bg-white rounded-3xl shadow-2xl p-8 w-80 transition-all duration-300
+                    ${isCenter ? 'border-4 border-green-400' : 'border-2 border-green-200'}
+                    ${isHovered && !isCenter ? 'shadow-green-300/50' : ''}`}>
+
+                    <div className="relative mb-6">
+                      <motion.img
+                        src={member.image}
+                        alt={member.name}
+                        className={`w-32 h-32 rounded-full object-cover mx-auto border-4 
+                          ${isCenter ? 'border-green-400' : 'border-green-200'}`}
+                        animate={{
+                          scale: isHovered ? 1.1 : 1,
+                          rotate: isHovered ? 5 : 0
+                        }}
+                        transition={{ duration: 0.3 }}
+                      />
+                      {isCenter && (
+                        <motion.div
+                          className="absolute -top-2 -right-2 bg-green-500 text-white rounded-full w-12 h-12 flex items-center justify-center text-2xl font-bold"
+                          initial={{ scale: 0, rotate: -180 }}
+                          animate={{ scale: 1, rotate: 0 }}
+                          transition={{ delay: 0.2, type: "spring" }}
+                        >
+                           <img src="/TechTribe-BrightLOGO.png" alt="Logo" className="rounded-4xl" />
+                        </motion.div>
+                      )}
+                    </div>
+
+                    <div className="text-center space-y-3">
+                      <h3 className="text-2xl font-bold text-green-800">
+                        {member.name}
+                      </h3>
+                      <p className="text-emerald-600 font-semibold">
+                        {member.designation}
+                      </p>
+
+                      <AnimatePresence mode="wait">
+                        {(isCenter || isHovered) && (
+                          <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            exit={{ opacity: 0, height: 0 }}
+                            transition={{ duration: 0.3 }}
+                          >
+                            <blockquote className="text-gray-800 italic text-sm mt-4">
+                              "{member.desc}"
+                            </blockquote>
+
+                            <div className="flex justify-center space-x-4 mt-6">
+                              <motion.a
+                                whileHover={{ scale: 1.2, rotate: 5 }}
+                                whileTap={{ scale: 0.9 }}
+                                href={member.linkedin}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-green-600 hover:text-green-800 transition-colors"
+                              >
+                                <Linkedin size={22} />
+                              </motion.a>
+                              <motion.a
+                                whileHover={{ scale: 1.2, rotate: -5 }}
+                                whileTap={{ scale: 0.9 }}
+                                href={member.github}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-green-600 hover:text-green-800 transition-colors"
+                              >
+                                <Github size={22} />
+                              </motion.a>
+                              <motion.a
+                                whileHover={{ scale: 1.2, rotate: 5 }}
+                                whileTap={{ scale: 0.9 }}
+                                href={member.instagram}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-green-600 hover:text-green-800 transition-colors"
+                              >
+                                <Instagram size={22} />
+                              </motion.a>
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        )}
 
         {/* Navigation Buttons */}
         <motion.button
           whileHover={{ scale: 1.1, x: -5 }}
           whileTap={{ scale: 0.95 }}
           onClick={handlePrev}
-          className="absolute left-4 z-50 bg-white/90 backdrop-blur-sm p-4 rounded-full shadow-xl 
-            border-2 border-green-300 text-green-700 hover:bg-green-50 transition-colors"
+          className={`absolute ${isMobile ? 'left-2' : 'left-4'} z-50 bg-white/90 backdrop-blur-sm p-3 md:p-4 rounded-full shadow-xl 
+            border-2 border-green-300 text-green-700 hover:bg-green-50 transition-colors`}
         >
           <ChevronLeft size={isMobile ? 20 : 28} />
         </motion.button>
@@ -303,8 +452,8 @@ const Members = () => {
           whileHover={{ scale: 1.1, x: 5 }}
           whileTap={{ scale: 0.95 }}
           onClick={handleNext}
-          className="absolute right-4 z-50 bg-white/90 backdrop-blur-sm p-4 rounded-full shadow-xl 
-            border-2 border-green-300 text-green-700 hover:bg-green-50 transition-colors"
+          className={`absolute ${isMobile ? 'right-2' : 'right-4'} z-50 bg-white/90 backdrop-blur-sm p-3 md:p-4 rounded-full shadow-xl 
+            border-2 border-green-300 text-green-700 hover:bg-green-50 transition-colors`}
         >
           <ChevronRight size={isMobile ? 20 : 28} />
         </motion.button>
