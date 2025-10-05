@@ -3,7 +3,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 
 export default function Footer() {
-  const [hoveredLink, setHoveredLink] = useState(null);
+  const [hoveredLink, setHoveredLink] = useState<string | null> (null);
 
   return (
     <footer className="relative bg-gradient-to-br from-gray-900 via-green-900 to-gray-900 text-white py-16 overflow-hidden">
