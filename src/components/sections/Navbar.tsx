@@ -11,6 +11,7 @@ import {
   MobileNavToggle,
   MobileNavMenu,
 } from "./resizable-navbar";
+import { Users } from "lucide-react";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -60,11 +61,11 @@ const Navbar = () => {
             items={navLinks}
             onItemClick={(item) => scrollToSection(item.link)}
           />
-          <a className="flex items-center gap-4 "
+          <a className="flex items-center gap-4"
             href=" https://chat.whatsapp.com/Kv9PQO8HwQlAJnlU0W9pIP?mode=ems_wa_t"
             target="_blank"
             rel="noopener noreferrer">
-            <NavbarButton variant="primary">Join Us</NavbarButton>
+            <NavbarButton variant="primary" className="flex items-center"><Users className="h-4 w-4 mr-3"/>Join Us</NavbarButton>
           </a>
         </NavBody>
 
