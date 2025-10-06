@@ -1,11 +1,7 @@
 import { motion } from "framer-motion";
 import { Code2, Globe, BookOpen, TrendingUp, Users, GraduationCap, Sparkles } from 'lucide-react';
 import { useState } from 'react';
-
-const fadeIn = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-};
+import SectionHeader from "../ui/SectionHeader";
 
 interface Highlight {
   icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
@@ -170,7 +166,7 @@ const FlipCard: React.FC<FlipCardProps> = ({ highlight, index }) => {
               <h3 className={`text-2xl font-bold bg-gradient-to-r ${highlight.color} bg-clip-text text-transparent mb-4`}>
                 {highlight.title}
               </h3>
-              
+
               <p className="text-gray-700 text-sm leading-relaxed px-4">
                 {highlight.desc}
               </p>
@@ -231,11 +227,11 @@ const FlipCard: React.FC<FlipCardProps> = ({ highlight, index }) => {
 
             <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white">
               <Icon className="w-16 h-16 mb-6 opacity-90" strokeWidth={1.5} />
-              
+
               <h3 className="text-2xl font-bold mb-4">
                 {highlight.title}
               </h3>
-              
+
               <p className="text-white/90 text-base leading-relaxed px-4">
                 {highlight.details}
               </p>
@@ -254,10 +250,10 @@ const FlipCard: React.FC<FlipCardProps> = ({ highlight, index }) => {
 const Highlights = () => {
   return (
     <section
-    style={{
-  // background: "linear-gradient(145deg, #ffffff 0%, #e0f7eb 70%, #6ee7b7 100%)"
-  background: "linear-gradient(145deg, #ffffff  0%, #e0f7eb 70%, #98f5cb 100%)"
-}}
+      style={{
+        // background: "linear-gradient(145deg, #ffffff 0%, #e0f7eb 70%, #6ee7b7 100%)"
+        background: "linear-gradient(145deg, #ffffff  0%, #e0f7eb 70%, #98f5cb 100%)"
+      }}
       className="min-h-screen py-20 relative overflow-hidden"
       id="highlights"
     >
@@ -291,64 +287,12 @@ const Highlights = () => {
 
       <div className="container mx-auto px-4 relative z-10">
         {/* Header */}
-        <div className="mb-20 text-center">
-          <motion.div
-            variants={fadeIn}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            className="inline-block"
-          >
-            <motion.span
-              className="inline-block text-sm font-semibold text-green-600 bg-green-100 px-4 py-2 rounded-full mb-4"
-              animate={{ scale: [1, 1.05, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            >
-              ✨ Discover Your Potential
-            </motion.span>
-          </motion.div>
-
-          <motion.h2
-            variants={fadeIn}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            className="text-5xl md:text-7xl font-bold mb-6"
-          >
-            <span className="bg-gradient-to-r from-green-600 via-emerald-500 to-teal-600 bg-clip-text text-transparent">
-              Why Join TechTribe?
-            </span>
-          </motion.h2>
-
-          <motion.div
-            className="flex justify-center gap-2 mb-8"
-            variants={fadeIn}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-          >
-            {[...Array(3)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="w-16 h-1 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full"
-                initial={{ scaleX: 0 }}
-                whileInView={{ scaleX: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.5 }}
-              />
-            ))}
-          </motion.div>
-
-          <motion.p
-            variants={fadeIn}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            className="text-xl text-gray-600 max-w-2xl mx-auto"
-          >
-            Discover the many ways TechTribe empowers developers to learn, grow, and make a difference
-          </motion.p>
-        </div>
+          <SectionHeader
+            badgeText="✨ Empower Your Tech Journey"
+            headingText="Why Join TechTribe?"
+            descriptionText="Explore how TechTribe empowers passionate developers and learners to grow, collaborate, and create real impact in the tech world"
+          />
+        
 
         {/* Flip Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
