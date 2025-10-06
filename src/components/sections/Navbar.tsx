@@ -10,8 +10,9 @@ import {
   MobileNavHeader,
   MobileNavToggle,
   MobileNavMenu,
-} from "./resizable-navbar";
+} from "../ui/resizable-navbar";
 import { Users } from "lucide-react";
+import { motion } from "framer-motion";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -47,7 +48,11 @@ const Navbar = () => {
   };
 
   return (
-    <div
+    <motion.div
+    initial={{ opacity: 0, y: -30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
+        viewport={{ once: true }}
       className={`fixed top-0 left-0 w-full z-50 transition-colors duration-300 ${isScrolled
           ? ""
           : "bg-transparent"
@@ -104,7 +109,7 @@ const Navbar = () => {
           </MobileNavMenu>
         </MobileNav>
       </BaseNavbar>
-    </div>
+    </motion.div>
   );
 };
 
