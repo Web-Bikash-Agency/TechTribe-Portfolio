@@ -1,48 +1,36 @@
-// src/constants/members.ts
 export const coreTeam = [
   {
     id: 1,
-    name: "Naruto Uzumaki",
-    designation: "Software Engineer",
-    role: "Tech Lead",
-    desc: "Sophia is a creative designer with strong skills in wireframing, prototyping, and user research. She excels at crafting visually appealing designs that balance aesthetics with usability.",
+    name: "Pijus Dinda",
+    role: "Tech Lead & Event Coordinator",
     image:
-      "/naruto.jpg",
+      "https://res.cloudinary.com/dflelt85r/image/upload/v1759721106/pijush_bwnttg.jpg",
   },
   {
     id: 2,
-    name: "Alisa Kujou",
-    designation: "Product Manager",
-    role: "Event Organizer",
-    desc: "Sophia is a creative designer with strong skills in wireframing, prototyping, and user research. She excels at crafting visually appealing designs that balance aesthetics with usability.",
+    name: "Sukanya Mahapatra",
+    role: "Public Relations Lead",
     image:
-      "/alya.jpg",
+      "https://res.cloudinary.com/dflelt85r/image/upload/v1759677968/sukanya_mdj28m.jpg",
   },
   {
     id: 3,
-    name: "Monkey D. Luffy",
-    designation: "Data Scientist",
-    role: "Marketer",
-    desc: "Alice is skilled in building responsive and interactive web interfaces using React and modern CSS frameworks. She specializes in creating smooth user experiences with a strong eye for detail.",
+    name: "Kalyan Manna",
+    role: "Tech Lead",
     image:
-      "/lufi.jpg",
+      "https://res.cloudinary.com/dflelt85r/image/upload/v1759677758/kalyan_lvhu1a.jpg",
   },
   {
     id: 4,
-    name: "Makima",
-    designation: "UX Designer",
-    role: "Tech Lead",
-    desc: "Ravi has expertise in Node.js and database management, focusing on scalable and secure backend systems. He’s passionate about APIs, microservices, and optimizing server performance.",
+    name: "Riya Bera",
+    role: "Public Relations Lead",
     image:
-      "/makima.jpg",
-  },
-  {
+      "https://res.cloudinary.com/dflelt85r/image/upload/v1759721395/riya_vkonnc.jpg",
+  },{
     id: 5,
-    name: "Satoru Gojo",
-    designation: "Soap Developer",
+    name: "Saptarshi Bisoi",
     role: "Tech Lead",
-    desc: "Alice is skilled in building responsive and interactive web interfaces using React and modern CSS frameworks. She specializes in creating smooth user experiences with a strong eye for detail.",
     image:
-      "/gojo.jpg",
+      "https://res.cloudinary.com/dflelt85r/image/upload/v1759677967/saptarshi_kc5544.jpg",
   },
 ]
