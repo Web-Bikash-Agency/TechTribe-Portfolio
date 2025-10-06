@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { 
   Code2, 
@@ -23,6 +23,11 @@ export default function TechWelcomeScreen({ onComplete, duration = 4000 }: Welco
   const [showSubtitle, setShowSubtitle] = useState(false)
   const [showIcons, setShowIcons] = useState(false)
 
+const handleDismiss = useCallback(() => {
+    setIsVisible(false)
+    setTimeout(onComplete, 600)
+  },[onComplete])
+
   useEffect(() => {
     const subtitleTimer = setTimeout(() => setShowSubtitle(true), 600)
     const iconsTimer = setTimeout(() => setShowIcons(true), 1000)
@@ -41,12 +46,9 @@ export default function TechWelcomeScreen({ onComplete, duration = 4000 }: Welco
       document.removeEventListener("keydown", handleKeyPress)
       document.removeEventListener("click", handleClick)
     }
-  }, [duration])
+  }, [duration, handleDismiss])
 
-  const handleDismiss = () => {
-    setIsVisible(false)
-    setTimeout(onComplete, 600)
-  }
+  
 
   // Tech icons configuration with positions
   const techIcons = [
