@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
-// import { BackgroundBeams } from "../../animation/BackgroundBeams"
 import { Users } from "lucide-react"
 import { Rocket } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion";
 import FloatingTechLogos from "../../animation/FloatingTechLogos";
-// import DarkVeil from "../../animation/DarkVeil";
 import Particles from "../../animation/Particles";
 
 
@@ -34,10 +32,10 @@ const Hero = () => {
 
   return (
     <div className="relative overflow-hidden border-b border-gray-200 bg-gray-50 h-screen flex flex-col items-center justify-center"
-    style={{
-            // background: " linear-gradient(135deg, #f8fafc 0%, #d1fae5 50%, #10b981 100%)"
-            background: " linear-gradient(145deg, #ffffff 0%, #d1fae5 70%, #10b981 100%)"
-          }}>
+      style={{
+        // background: " linear-gradient(135deg, #f8fafc 0%, #d1fae5 50%, #10b981 100%)"
+        background: " linear-gradient(145deg, #ffffff 0%, #d1fae5 70%, #10b981 100%)"
+      }}>
       <div className="relative w-full">
 
       </div>
@@ -53,7 +51,14 @@ const Hero = () => {
           disableRotation={false}
         />
       </div>
-      <FloatingTechLogos/>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={animationStage >= 1 ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+        transition={{ duration: 2.2, ease: [0.22, 1, 0.36, 1] }}
+        className="absolute inset-0 w-full h-full"
+      >
+        <FloatingTechLogos />
+      </motion.div>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="relative flex flex-col items-center justify-center h-full">
@@ -66,8 +71,8 @@ const Hero = () => {
                 opacity: 1,
                 y: 0,
                 transition: {
-                  duration: 0.8,
-                  ease: [0.16, 1, 0.3, 1],
+                  duration: 1.5,
+                  ease: [0.22, 1, 0.36, 1],
                   delay: 0.2
                 }
               }
