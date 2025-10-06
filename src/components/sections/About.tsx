@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
 import CountUp from "../../animation/CountUp";
-import { Rocket } from "../ui/Rocket";
-import { Globe } from "../ui/Globe";
-import { HeartHandshake } from "../ui/HeartHandshake"
+import { Rocket } from "../../animation/Rocket";
+import { Globe } from "../../animation/Globe";
+import { HeartHandshake } from "../../animation/HeartHandshake"
 import type { ReactElement } from "react";
+import SectionHeader from "../ui/SectionHeader";
 
 type StatColor = "green" | "blue" | "purple" | "orange" | "cyan";
 
@@ -39,10 +40,7 @@ const shadowColors: Record<StatColor, string> = {
   cyan: "shadow-cyan-400/20 hover:shadow-cyan-400/40",
 };
 
-const fadeIn = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-};
+
 // Animation variants for better performance and smoother transitions
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -213,62 +211,11 @@ const About = () => {
     >
       <div className="max-w-6xl mx-auto">
         {/* Header Section */}
-        <motion.div
-          variants={itemVariants}
-          className="text-center mb-16"
-        >
-          <motion.div
-            initial={{ scale: 0 }}
-            whileInView={{ scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-            className="inline-block px-6 py-2 bg-emerald-500/10 border border-emerald-500/30 rounded-full mb-6"
-          >
-            <span className="text-emerald-400 font-semibold tracking-wider uppercase text-sm">
-              Our Community
-            </span>
-          </motion.div>
-          <motion.h2
-            variants={fadeIn}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            className="text-5xl md:text-7xl font-bold mb-6"
-          >
-            <span className="bg-gradient-to-r from-green-600 via-emerald-500 to-teal-600 bg-clip-text text-transparent">
-              About Our Community
-            </span>
-          </motion.h2>
-
-          <motion.div
-            className="flex justify-center gap-2 mb-8"
-            variants={fadeIn}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-          >
-            {[...Array(3)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="w-16 h-1 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full"
-                initial={{ scaleX: 0 }}
-                whileInView={{ scaleX: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.5 }}
-              />
-            ))}
-          </motion.div>
-
-          <motion.p
-            className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            A vibrant ecosystem of developers, learners, and innovators building the future together
-          </motion.p>
-        </motion.div>
+        <SectionHeader
+          badgeText="✨ Our Community"
+          headingText="About TechTribe"
+          descriptionText="A vibrant ecosystem of developers, learners, and innovators — united by a shared passion for technology, collaboration, and growth"
+        />
 
         {/* Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
