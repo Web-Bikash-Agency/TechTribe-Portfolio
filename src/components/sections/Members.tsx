@@ -1,38 +1,16 @@
-// import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-// import { Linkedin, Github, Instagram, ChevronLeft, ChevronRight } from "lucide-react";
-// import { members } from "../context/members";
 import { founder } from "../context/founder";
 import { coreTeam } from "../context/coreTeam";
 import { AnimatedTooltip } from "../ui/AnimatedTooltips";
 import SectionHeader from "../ui/SectionHeader";
 import Carousel from "../ui/Carousel";
 
-// const useIsMobile = (breakpoint = 768) => {
-//   const [isMobile, setIsMobile] = useState(false);
-
-//   useEffect(() => {
-//     const check = () => setIsMobile(window.innerWidth < breakpoint);
-//     check();
-//     window.addEventListener("resize", check);
-//     return () => window.removeEventListener("resize", check);
-//   }, [breakpoint]);
-
-//   return isMobile;
-// };
-
 const Members = () => {
-
-  // const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-
-
-
-
+ 
   return (
     <section
       id="members"
       style={{
-        // background: "linear-gradient(145deg, #ffffff 0%, #e0f7eb 70%, #6ee7b7 100%)"
         background: "linear-gradient(145deg, #98f5cb  0%, #e0f7eb 30%, #ffffff 100%)"
       }}
       className="py-20 md:py-28 bg-gradient-to-br from-slate-50 via-green-50 to-green-100 relative"

@@ -251,7 +251,6 @@ const Highlights = () => {
   return (
     <section
       style={{
-        // background: "linear-gradient(145deg, #ffffff 0%, #e0f7eb 70%, #6ee7b7 100%)"
         background: "linear-gradient(145deg, #ffffff  0%, #e0f7eb 70%, #98f5cb 100%)"
       }}
       className="min-h-screen py-20 relative overflow-hidden"

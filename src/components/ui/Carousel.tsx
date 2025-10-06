@@ -128,7 +128,7 @@ const Carousel = () => {
     }
   };
 
-  const SocialIcon = ({ href, Icon, colorClass }: { href: string; Icon: any; colorClass: string }) => (
+  const SocialIcon = ({ href, Icon, colorClass }: { href: string; Icon: React.ComponentType<{ size?: number }>; colorClass: string }) => (
     <motion.a
       href={href}
       target="_blank"

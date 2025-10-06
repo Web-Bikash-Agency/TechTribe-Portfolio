@@ -33,7 +33,6 @@ const Hero = () => {
   return (
     <div className="relative overflow-hidden border-b border-gray-200 bg-gray-50 h-screen flex flex-col items-center justify-center"
       style={{
-        // background: " linear-gradient(135deg, #f8fafc 0%, #d1fae5 50%, #10b981 100%)"
         background: " linear-gradient(145deg, #ffffff 0%, #d1fae5 70%, #10b981 100%)"
       }}>
       <div className="relative w-full">

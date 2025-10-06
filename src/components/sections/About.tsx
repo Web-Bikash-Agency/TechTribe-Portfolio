@@ -88,7 +88,6 @@ const cardHoverVariants: Variants = {
 };
 
 const TechSupportCard = () => {
-  // const color: StatColor = "purple";
 
   return (
     <motion.div
