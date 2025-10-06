@@ -18,7 +18,9 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           {/* Logo + About */}
           <div className="transform transition-all duration-300">
-            <div className="flex items-center text-2xl font-bold mb-4 group">
+            <div className="flex items-center text-2xl font-bold mb-4 group"
+            
+            >
               
               <motion.div
               animate={{
