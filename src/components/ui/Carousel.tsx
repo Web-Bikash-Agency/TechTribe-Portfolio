@@ -157,6 +157,7 @@ const Carousel = () => {
 
       >
         {isMobile ? (
+          
           // Mobile: Single card with slide animation
           <div className="relative w-full max-w-sm mx-auto h-full flex items-center">
             <AnimatePresence initial={false} custom={direction} mode="wait">
@@ -184,7 +185,7 @@ const Carousel = () => {
                       className={`w-32 h-32 rounded-full object-cover mx-auto ${getBorderColor(members[current], true)}`}
                     />
                     <div className="absolute -top-2 -right-2 bg-green-500 text-white rounded-full w-12 h-12 flex items-center justify-center text-xs font-bold">
-                      <img src="/TechTribe-BrightLOGO.png" alt="Logo" className="rounded-4xl" />
+                      <img src="https://res.cloudinary.com/dflelt85r/image/upload/v1759733373/TechTribe-BrightLOGO_1_oprubi.png" alt="Logo" className="rounded-4xl" />
                     </div>
                   </div>
 
@@ -195,13 +196,10 @@ const Carousel = () => {
                     <p className="text-emerald-600 font-semibold">
                       {members[current].domain}
                     </p>
-                    {/* <p className="text-gray-500 text-sm">
-                      {members[current].role}
-                    </p> */}
-
-                    <blockquote className="text-gray-800 italic text-sm mt-4 px-2">
+                   
+                    <p className="text-gray-800 italic text-sm mt-4 px-2">
                       "{members[current].desc}"
-                    </blockquote>
+                    </p>
 
                     <div className="flex justify-center space-x-4 mt-6">
                       <motion.a
@@ -307,7 +305,7 @@ const Carousel = () => {
                           animate={{ scale: 1, rotate: 0 }}
                           transition={{ delay: 0.2, type: "spring" }}
                         >
-                          <img src="/TechTribe-BrightLOGO.png" alt="Logo" className="rounded-4xl" />
+                          <img src="https://res.cloudinary.com/dflelt85r/image/upload/v1759733373/TechTribe-BrightLOGO_1_oprubi.png" alt="Logo" className="rounded-4xl" />
                         </motion.div>
                       )}
                     </div>
