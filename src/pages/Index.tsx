@@ -4,28 +4,19 @@ import About from "../components/sections/About";
 import Highlights from "../components/sections/Highlights";
 import Members from "../components/sections/Members";
 import Footer from "../components/sections/Footer";
-import ClickSpark from "../components/ClickSpark"; // your ClickSpark component
+// import Ribbons from "../components/Ribbons";
 
 const Index = () => {
   return (
-    <ClickSpark sparkColor="#22c55e" sparkCount={10} sparkRadius={25}>
-      <Navbar />
-      <main>
-        <section id="home">
-          <Hero />
-        </section>
-        <section id="about">
-          <About />
-        </section>
-        <section id="highlights">
-          <Highlights />
-        </section>
-        <section id="members">
-          <Members />
-        </section>
-      </main>
-      <Footer />
-    </ClickSpark>
+    <>
+      <Navbar/>
+      <Hero/>
+      <About/>
+      <Highlights/>
+      <Members/>
+      <Footer/>
+      
+    </>
   );
 };
 
