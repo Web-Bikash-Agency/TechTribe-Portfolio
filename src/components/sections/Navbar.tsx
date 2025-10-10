@@ -48,39 +48,61 @@ const Navbar = () => {
   };
 
   return (
-    <motion.div
-    initial={{ opacity: 0, y: -30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
-        viewport={{ once: true }}
+    <motion.nav
+      initial={{ opacity: 0, y: -30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7 }}
+      viewport={{ once: true }}
       className={`fixed top-0 left-0 w-full z-50 transition-colors duration-300 ${isScrolled
-          ? ""
-          : "bg-transparent"
+        ? ""
+        : "bg-transparent"
         }`}
     >
       <BaseNavbar>
         {/* Desktop Navigation */}
         <NavBody>
-          <NavbarLogo />
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToSection("#home");
+            }}
+            aria-label="Go to TechTribe homepage"
+            className="cursor-pointer"
+          >
+            <NavbarLogo />
+          </button>
           <NavItems
             items={navLinks}
             onItemClick={(item) => scrollToSection(item.link)}
           />
-          <a className="flex items-center gap-4"
-            href=" https://chat.whatsapp.com/Kv9PQO8HwQlAJnlU0W9pIP?mode=ems_wa_t"
+          <a href="https://chat.whatsapp.com/Kv9PQO8HwQlAJnlU0W9pIP?mode=ems_wa_t"
             target="_blank"
-            rel="noopener noreferrer">
-            <NavbarButton variant="primary" className="flex items-center"><Users className="h-4 w-4 mr-3"/>Join Us</NavbarButton>
+            rel="noopener noreferrer"
+            aria-label="Join TechTribe community on WhatsApp"
+            title="Join TechTribe community"
+            className="flex items-center gap-4"
+          >
+            <NavbarButton variant="primary" className="flex items-center"><Users className="h-4 w-4 mr-3" aria-hidden="true" />Join Us</NavbarButton>
           </a>
         </NavBody>
 
         {/* Mobile Navigation */}
         <MobileNav>
           <MobileNavHeader>
-            <NavbarLogo />
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection("#home");
+              }}
+              aria-label="Go to TechTribe homepage"
+              className="cursor-pointer"
+            >
+              <NavbarLogo />
+            </button>
             <MobileNavToggle
               isOpen={isMobileMenuOpen}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label="Toggle mobile menu"
             />
           </MobileNavHeader>
 
@@ -96,20 +118,28 @@ const Navbar = () => {
                   e.preventDefault();
                   scrollToSection(item.link);
                 }}
-                className="block w-full rounded-md px-4 py-2 text-lg text-neutral-600 hover:bg-gray-100 dark:text-neutral-300 dark:hover:bg-neutral-800"
+                className="block w-full rounded-md px-4 py-2 text-lg text-emerald-600 hover:bg-gray-100 dark:text-neutral-300 dark:hover:bg-neutral-800"
               >
                 {item.name}
               </a>
             ))}
             <div className="flex w-full flex-col gap-4">
-              <NavbarButton variant="primary" className="w-full">
-                Join Us
-              </NavbarButton>
+              <a
+                href="https://chat.whatsapp.com/Kv9PQO8HwQlAJnlU0W9pIP?mode=ems_wa_t"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Join TechTribe community on WhatsApp"
+                title="Join TechTribe community"
+              >
+                <NavbarButton variant="primary" className="w-full">
+                  Join Us
+                </NavbarButton>
+              </a>
             </div>
           </MobileNavMenu>
         </MobileNav>
       </BaseNavbar>
-    </motion.div>
+    </motion.nav>
   );
 };
 
