@@ -18,7 +18,7 @@ interface WelcomeSplashProps {
   duration?: number
 }
 
-export default function TechWelcomeScreen({ onComplete, duration = 4000 }: WelcomeSplashProps) {
+export default function WelcomeScreen({ onComplete, duration = 4000 }: WelcomeSplashProps) {
   const [isVisible, setIsVisible] = useState(true)
   const [showSubtitle, setShowSubtitle] = useState(false)
   const [showIcons, setShowIcons] = useState(false)
@@ -71,7 +71,6 @@ const handleDismiss = useCallback(() => {
           className="fixed inset-0 z-50 flex items-center justify-center cursor-pointer overflow-hidden"
           onClick={handleDismiss}
           style={{
-            // background: " linear-gradient(135deg, #f8fafc 0%, #d1fae5 50%, #10b981 100%)"
             background: " linear-gradient(135deg, #10b981 0%, #d1fae5 50%, #f8fafc 100%)"
           }}
         >
