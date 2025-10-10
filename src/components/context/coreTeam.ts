@@ -31,6 +31,6 @@ export const coreTeam = [
     name: "Saptarshi Bisoi",
     role: "Tech Lead",
     image:
-      "https://res.cloudinary.com/dflelt85r/image/upload/v1759677967/saptarshi_kc5544.jpg",
+      "https://res.cloudinary.com/dflelt85r/image/upload/v1760073552/saptarshi2_kyodrs.jpg",
   },
 ]
