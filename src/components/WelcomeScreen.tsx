@@ -9,7 +9,6 @@ import {
   Cpu, 
   Database, 
   GitBranch,
-  Sparkles,
   Zap
 } from "lucide-react"
 
@@ -208,8 +207,8 @@ const handleDismiss = useCallback(() => {
                   }}
                   className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-full blur-xl opacity-50"
                 />
-                <div className="relative bg-gradient-to-br from-slate-800 to-slate-900 p-4 rounded-2xl border border-emerald-400/30">
-                  <Sparkles className="w-8 h-8 text-emerald-400" />
+                <div className="relative bg-gradient-to-br from-slate-600 to-slate-800 p-4 rounded-2xl border border-emerald-400/30">
+                  <img src="https://res.cloudinary.com/dflelt85r/image/upload/v1760072585/TechTribeLogo-removebg-preview_gprqft.png" alt="TechTribeLogo" width={50} height={50}/>
                 </div>
               </div>
             </motion.div>
@@ -226,7 +225,7 @@ const handleDismiss = useCallback(() => {
                 }}
                 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-2"
               >
-                <span className="text-gray-600">Welcome to</span>
+                <span className="bg-gradient-to-r from-gray-600 to-gray-700 bg-clip-text text-transparent">Welcome to</span>
                 <motion.span
                   className="inline-block bg-gradient-to-r from-emerald-400  to-emerald-700 bg-clip-text text-transparent"
                   animate={{
