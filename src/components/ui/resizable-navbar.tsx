@@ -1,5 +1,5 @@
 "use client";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 import { IconMenu2, IconX } from "@tabler/icons-react";
 import {
   motion,
@@ -237,15 +237,15 @@ export const NavbarLogo = () => {
   return (
     <a
       href="#"
-      className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-black"
+      className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-md font-normal text-black"
     >
       <img
-        src="https://assets.aceternity.com/logo-dark.png"
+        src="https://res.cloudinary.com/dflelt85r/image/upload/v1760072585/TechTribeLogo-removebg-preview_gprqft.png"
         alt="logo"
         width={30}
         height={30}
       />
-      <span className="font-bold text-black dark:text-white">TechTribe</span>
+      <span className="font-bold text-green-700 dark:text-white">TechTribe</span>
     </a>
   );
 };
@@ -272,7 +272,7 @@ export const NavbarButton = ({
 
   const variantStyles = {
     primary:
-      "bg-white text-gray-700 rounded-xl shadow-lg hover:bg-green-50 hover:text-green-700 hover:shadow-green-500/25 transition-all duration-300",
+      "bg-green-600 text-white rounded-xl shadow-lg hover:bg-green-50 hover:text-green-700 hover:shadow-green-500/25 transition-all duration-300",
     secondary: "bg-transparent shadow-none dark:text-white",
     dark: "bg-black text-white shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]",
     gradient:
