@@ -8,7 +8,7 @@ export const members = [
     image: "https://res.cloudinary.com/dflelt85r/image/upload/v1759721106/pijush_bwnttg.jpg",
     linkedin: "https://www.linkedin.com/in/pijus0101/",
     github: "https://github.com/Piku74",
-    instagram: "#undefined",
+    instagram: "#",
     gender: "male"
   },
   {
@@ -49,7 +49,7 @@ export const members = [
     name: "Saptarshi Bisoi",
     domain: "MERN Stack Developer & Graphics Designer",
     desc: "Success is built on consistency, not motivation.",
-    image: "https://res.cloudinary.com/dflelt85r/image/upload/v1759677967/saptarshi_kc5544.jpg",
+    image: "https://res.cloudinary.com/dflelt85r/image/upload/v1760073552/saptarshi2_kyodrs.jpg",
     linkedin: "https://www.linkedin.com/in/saptarshi-legend/",
     github: " https://github.com/saptarshi-bisoi",
     instagram: "https://www.instagram.com/saptarshi.valid/",
@@ -62,7 +62,7 @@ export const members = [
     desc: "Code with logic, design with purpose",
     image: "https://res.cloudinary.com/dflelt85r/image/upload/v1759677859/moumita_qywmm7.jpg",
     linkedin: "https://www.linkedin.com/in/moumita-maity-77bb2b375",
-    github: "#undefined",
+    github: "#",
     instagram: "https://www.instagram.com/moumita_maity2005?igsh=dm1iOHN5bjFuaHoy",
     gender: "female"
   },
@@ -73,8 +73,8 @@ export const members = [
     desc: "Dream in code. Build in reality",
     image: "https://res.cloudinary.com/dflelt85r/image/upload/v1759677898/sathi_apj8gx.jpg",
     linkedin: " https://www.linkedin.com/in/sathi-satvaya-6710aa376",
-    github: "#undefined",
-    instagram: "#undefined",
+    github: "#",
+    instagram: "#",
     gender: "female"
   },
   {
@@ -105,7 +105,7 @@ export const members = [
     domain: "Full-Stack Web Developer",
     linkedin: "https://www.linkedin.com/in/anubhav-chowdhury-b7905b339",
     github: "https://github.com/Anubhav-webdev",
-    instagram: "#undefined",
+    instagram: "#",
     desc: "LIFE is a journey, not a race. Enjoy every step",
     image:"https://res.cloudinary.com/dflelt85r/image/upload/v1759677827/anubhav_pic_josug6.webp",
     gender: "male"
@@ -127,7 +127,7 @@ export const members = [
     domain: "Cybersecurity Analyst & Pentesting",
     linkedin: "https://www.linkedin.com/in/angsuman-0xcc-8258322b7",
     github: "https://github.com/angsu0x90",
-    instagram: "#undefined",
+    instagram: "#",
     desc: "Lean your vulnerability to secure it",
     image:"",
     gender: "male"
