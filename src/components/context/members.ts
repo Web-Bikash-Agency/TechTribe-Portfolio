@@ -1,4 +1,3 @@
-// src/constants/members.ts
 export const members = [
   {
     id: 1,
@@ -80,7 +79,7 @@ export const members = [
   {
     id: 8,
     name: "Anjan Mahata",
-    domain: "AI & ML Learner",
+    domain: "Cyber Security Enthusiast",
     desc: "Your comfort zone is your enemy.",
     image: "https://res.cloudinary.com/dflelt85r/image/upload/v1759721110/anjan_jpsc2b.jpg",
     linkedin: "https://www.linkedin.com/in/anjan-mahata-a36844378?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
@@ -129,7 +128,7 @@ export const members = [
     github: "https://github.com/angsu0x90",
     instagram: "#",
     desc: "Lean your vulnerability to secure it",
-    image:"",
+    image:"https://res.cloudinary.com/dflelt85r/image/upload/v1760103339/angsuman_remzor.jpg",
     gender: "male"
   },
   {
