@@ -6,6 +6,7 @@ import { Globe } from "../../animation/Globe";
 import { HeartHandshake } from "../../animation/HeartHandshake"
 import type { ReactElement } from "react";
 import SectionHeader from "../ui/SectionHeader";
+import { FaDiscord } from "react-icons/fa";
 
 type StatColor = "green" | "blue" | "purple" | "orange" | "cyan";
 
@@ -294,7 +295,10 @@ const About = () => {
             Join us, connect with like-minded individuals, and be part of a journey where
             learning is continuous, collaboration is meaningful, and every member's contribution matters.
           </motion.p>
-          <motion.button
+         <motion.a
+            href="https://discord.gg/nrZa4dYv"
+            target="_blank"
+            rel="noopener noreferrer"
             whileHover={{
               scale: 1.05,
               boxShadow: "0 20px 40px rgba(16, 185, 129, 0.3)"
@@ -307,12 +311,13 @@ const About = () => {
               transition: { delay: 0.8, duration: 0.6 }
             }}
             viewport={{ once: true }}
-            className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-8 py-3 
-              rounded-full font-semibold shadow-lg transition-all duration-300 cursor-not-allowed"
-
+            className="inline-flex items-center justify-center gap-3 bg-gradient-to-r from-green-500 to-emerald-600 
+      text-white px-8 py-3 rounded-full font-semibold shadow-lg transition-all duration-300 mx-auto"
+            aria-label="Join our Discord community"
           >
-            Join Our Community
-          </motion.button>
+            <FaDiscord className="w-5 h-5" />
+            <span>Join Discord</span>
+          </motion.a>
         </motion.div>
       </div>
     </section>
