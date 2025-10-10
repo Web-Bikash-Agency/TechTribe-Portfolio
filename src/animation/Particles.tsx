@@ -242,7 +242,8 @@ const Particles: React.FC<ParticlesProps> = ({
     particleBaseSize,
     sizeRandomness,
     cameraDistance,
-    disableRotation
+    disableRotation,
+    particleColors
   ]);
 
   return <div ref={containerRef} className={`relative w-full h-full ${className}`} />;
