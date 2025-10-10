@@ -113,9 +113,9 @@ const Carousel = () => {
         };
       case "female":
         return {
-          name: "text-pink-800",
-          domain: "text-pink-600",
-          social: "text-pink-600 hover:text-pink-800",
+          name: "text-pink-700",
+          domain: "text-pink-500",
+          social: "text-pink-400 hover:text-pink-600",
           shadow: "shadow-pink-300/50"
         };
       default:
@@ -128,28 +128,48 @@ const Carousel = () => {
     }
   };
 
-  const SocialIcon = ({ href, Icon, colorClass }: { href: string; Icon: React.ComponentType<{ size?: number }>; colorClass: string }) => (
+const SocialIcon = ({
+  href,
+  Icon,
+  colorClass,
+}: {
+  href: string;
+  Icon: React.ComponentType<{ size?: number }>;
+  colorClass: string;
+}) => {
+  const isDisabled = href === "#";
+
+  return (
     <motion.a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={colorClass}
-      whileHover={{
-        scale: 1.3,
-        rotate: 10,
-        y: -3,
-        textShadow: '0px 4px 12px rgba(0,0,0,0.2)',
-        transition: { type: 'spring', stiffness: 300, damping: 15 }
+      href={isDisabled ? undefined : href}
+      target={isDisabled ? undefined : "_blank"}
+      rel={isDisabled ? undefined : "noopener noreferrer"}
+      onClick={(e) => {
+        e.stopPropagation();
+        if (isDisabled) e.preventDefault(); 
       }}
-      whileTap={{ scale: 0.95, rotate: 0, y: 0, textShadow: 'none' }}
+      className={`${colorClass} ${isDisabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
+      whileHover={
+        !isDisabled
+          ? {
+              scale: 1.3,
+              rotate: 10,
+              y: -3,
+              textShadow: "0px 4px 12px rgba(0,0,0,0.2)",
+              transition: { type: "spring", stiffness: 300, damping: 15 },
+            }
+          : {}
+      }
+      whileTap={!isDisabled ? { scale: 0.95, rotate: 0, y: 0, textShadow: "none" } : {}}
     >
       <Icon size={22} />
     </motion.a>
   );
+};
+
 
   return (
-    <
-      >
+    <>
 
       {/* Carousel Container */}
       <div
@@ -157,7 +177,7 @@ const Carousel = () => {
 
       >
         {isMobile ? (
-          
+
           // Mobile: Single card with slide animation
           <div className="relative w-full max-w-sm mx-auto h-full flex items-center">
             <AnimatePresence initial={false} custom={direction} mode="wait">
@@ -185,18 +205,18 @@ const Carousel = () => {
                       className={`w-32 h-32 rounded-full object-cover mx-auto ${getBorderColor(members[current], true)}`}
                     />
                     <div className="absolute -top-2 -right-2 bg-green-500 text-white rounded-full w-12 h-12 flex items-center justify-center text-xs font-bold">
-                      <img src="https://res.cloudinary.com/dflelt85r/image/upload/v1759733373/TechTribe-BrightLOGO_1_oprubi.png" alt="Logo" className="rounded-4xl" />
+                      <img src="https://res.cloudinary.com/dflelt85r/image/upload/v1760072661/TechTribeLogo2_joegyt.jpg" alt="Logo" className="rounded-4xl" />
                     </div>
                   </div>
 
                   <div className="text-center space-y-3">
-                    <h3 className="text-2xl font-bold text-green-800">
+                    <h3 className={`text-2xl font-bold ${getGenderColors(members[current]).name}`}>
                       {members[current].name}
                     </h3>
-                    <p className="text-emerald-600 font-semibold">
+                    <p className={`font-semibold ${getGenderColors(members[current]).domain}`}>
                       {members[current].domain}
                     </p>
-                   
+
                     <p className="text-gray-800 italic text-sm mt-4 px-2">
                       "{members[current].desc}"
                     </p>
@@ -238,22 +258,6 @@ const Carousel = () => {
               </motion.div>
             </AnimatePresence>
 
-            {/* Mobile Dots Indicator */}
-            <div className="absolute -bottom-8 left-0 right-0 flex justify-center gap-2">
-              {members.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => {
-                    setDirection(index > current ? 1 : -1);
-                    setCurrent(index);
-                  }}
-                  className={`h-2 rounded-full transition-all duration-300 ${index === current
-                    ? 'w-8 bg-green-500'
-                    : 'w-2 bg-green-300'
-                    }`}
-                />
-              ))}
-            </div>
           </div>
         ) : (
           // Desktop: 3D Carousel
@@ -284,8 +288,10 @@ const Carousel = () => {
                   onMouseLeave={() => setHoveredCard(null)}
                 >
                   <div className={`bg-white rounded-3xl shadow-2xl p-8 w-80 transition-all duration-300
-                     ${getBorderColor(member, isCenter)}
-                    ${isHovered && !isCenter ? genderColors.shadow : ''}`}>
+                    ${getBorderColor(member, isCenter)}
+                    ${isHovered && !isCenter ? genderColors.shadow : ''}
+                    ${isHovered && isCenter ? `bg-white ${genderColors.shadow}` : ''}`}
+                  >
 
                     <div className="relative mb-6">
                       <motion.img
@@ -300,12 +306,12 @@ const Carousel = () => {
                       />
                       {isCenter && (
                         <motion.div
-                          className="absolute -top-2 -right-2 bg-green-500 text-white rounded-full w-12 h-12 flex items-center justify-center text-2xl font-bold"
+                          className="absolute -top-2 -right-2 bg-white text-white rounded-full w-12 h-12 flex items-center justify-center text-2xl font-bold"
                           initial={{ scale: 0, rotate: -180 }}
                           animate={{ scale: 1, rotate: 0 }}
                           transition={{ delay: 0.2, type: "spring" }}
                         >
-                          <img src="https://res.cloudinary.com/dflelt85r/image/upload/v1759733373/TechTribe-BrightLOGO_1_oprubi.png" alt="Logo" className="rounded-4xl" />
+                          <img src="https://res.cloudinary.com/dflelt85r/image/upload/v1760072585/TechTribeLogo-removebg-preview_gprqft.png" alt="Logo" className="rounded-4xl" />
                         </motion.div>
                       )}
                     </div>
@@ -324,17 +330,46 @@ const Carousel = () => {
                             initial={{ opacity: 0, height: 0 }}
                             animate={{ opacity: 1, height: "auto" }}
                             exit={{ opacity: 0, height: 0 }}
-                            transition={{ duration: 0.3 }}
+                            transition={{ delay: 0.25, duration: 0.3, type: "spring", stiffness: 200 }}
                           >
-                            <blockquote className="text-gray-800 italic text-sm mt-4">
+                            <motion.blockquote
+                              className="text-gray-800 italic text-sm mt-4"
+                              initial={{ opacity: 0, y: -10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ delay: 0.1, duration: 0.3 }}
+                            >
                               "{member.desc}"
-                            </blockquote>
+                            </motion.blockquote>
 
-                            <div className="flex justify-center space-x-4 mt-6">
-                              <SocialIcon href={member.linkedin} Icon={Linkedin} colorClass={genderColors.social} />
-                              <SocialIcon href={member.github} Icon={Github} colorClass={genderColors.social} />
-                              <SocialIcon href={member.instagram} Icon={Instagram} colorClass={genderColors.social} />
-                            </div>
+                            <motion.div
+                              className="flex justify-center space-x-4 mt-6"
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              transition={{ delay: 0.2, duration: 0.3 }}
+                            >
+                              <motion.div
+                                initial={{ opacity: 0, scale: 0.5, y: 10 }}
+                                animate={{ opacity: 1, scale: 1, y: 0 }}
+                                transition={{ delay: 0.25, duration: 0.3, type: "spring", stiffness: 200 }}
+                              >
+                                <SocialIcon href={member.linkedin} Icon={Linkedin} colorClass={genderColors.social} />
+                              </motion.div>
+                              <motion.div
+                                initial={{ opacity: 0, scale: 0.5, y: 10 }}
+                                animate={{ opacity: 1, scale: 1, y: 0 }}
+                                transition={{ delay: 0.35, duration: 0.3, type: "spring", stiffness: 200 }}
+                              >
+                                <SocialIcon href={member.github} Icon={Github} colorClass={genderColors.social} />
+                              </motion.div>
+                              <motion.div
+                                initial={{ opacity: 0, scale: 0.5, y: 10 }}
+                                animate={{ opacity: 1, scale: 1, y: 0 }}
+                                transition={{ delay: 0.45, duration: 0.3, type: "spring", stiffness: 200 }}
+                              >
+                                <SocialIcon href={member.instagram} Icon={Instagram} colorClass={genderColors.social} />
+                              </motion.div>
+                            </motion.div>
+
 
                           </motion.div>
                         )}
