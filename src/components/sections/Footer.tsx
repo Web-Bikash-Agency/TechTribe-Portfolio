@@ -82,10 +82,10 @@ export default function Footer() {
             </h3>
             <ul className="space-y-3 text-sm">
               {[
-                { name: "About Us", href: "#about" },
-                { name: "Members", href: "#members" },
-                { name: "Features", href: "#features" },
-                { name: "Jobs", href: "#jobs" }
+                { name: "Home", href: "#" },
+                { name: "About Us", href: "#" },
+                { name: "Highlight", href: "#" },
+                { name: "Members", href: "#" }
               ].map((link, idx) => (
                 <li key={idx}>
                   <a
@@ -167,22 +167,6 @@ export default function Footer() {
           </p>
         </div>
       </div>
-
-      <style>{`
-        @keyframes pulse {
-          0%, 100% {
-            opacity: 0.3;
-            transform: scale(1);
-          }
-          50% {
-            opacity: 0.5;
-            transform: scale(1.1);
-          }
-        }
-        .animate-pulse {
-          animation: pulse 4s ease-in-out infinite;
-        }
-      `}</style>
     </footer>
   );
 }
