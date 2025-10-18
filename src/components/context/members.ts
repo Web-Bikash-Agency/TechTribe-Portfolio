@@ -25,7 +25,7 @@ export const members = [
     id: 3,
     name: "Kalyan Manna",
     domain: "Full Stack Developer",
-    desc: "If your WHY is strong, the HOW becomes easy",
+    desc: "Both in coding and in life, errors are proof that you are trying",
     image: "https://res.cloudinary.com/dflelt85r/image/upload/v1759677758/kalyan_lvhu1a.jpg",
     linkedin: "https://www.linkedin.com/in/kalyan-manna/",
     github: "https://github.com/Kalyan-github-4",
