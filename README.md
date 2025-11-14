@@ -4,56 +4,66 @@ A modern, responsive, and visually appealing personal portfolio website built to
 
 ---
 
-## 🚀 Live Demo
-
-**(Add your deployed link here)**
-
----
-
 ## 📌 Features
 
 * Fully responsive modern UI
 * Smooth animations & transitions
 * Optimized for performance and accessibility
-* Project showcase with images/descriptions
 * Contact form / social media links integration
 * Component-based modular code structure
 * Clean and scalable folder architecture
 
 ---
 
-## 🛠️ Tech Stack
-
-### **Frontend:**
-
-* HTML5
-* Tailwind CSS
-* JavaScript (ES6+)
-* React (if applicable to your version)
-
-### **Design Tools:**
-
-* Figma / Adobe XD (if designed beforehand)
-
 ---
 
 ## 📂 Folder Structure
 
+
 ```
-TechTribe-Portfolio/
-│── public/
-│── src/
-│   ├── components/
-│   ├── pages/
-│   ├── assets/
-│   ├── styles/
-│   └── utils/
-│
-├── package.json
-├── tailwind.config.js
-├── README.md
-└── LICENSE
+└── 📁src
+    └── 📁animation
+        ├── CountUp.tsx
+        ├── FloatingTechLogos.tsx
+        ├── Globe.tsx
+        ├── HeartHandshake.tsx
+        ├── Particles.tsx
+        ├── Rocket.tsx
+    └── 📁components
+        └── 📁context
+            ├── coreTeam.ts
+            ├── founder.ts
+            ├── members.ts
+        └── 📁sections
+            ├── About.tsx
+            ├── Footer.tsx
+            ├── Hero.tsx
+            ├── Highlights.tsx
+            ├── Members.tsx
+            ├── Navbar.tsx
+        └── 📁ui
+            ├── AnimatedTooltips.tsx
+            ├── Carousel.tsx
+            ├── resizable-navbar.tsx
+            ├── SectionHeader.tsx
+        ├── WelcomeScreen.tsx
+    └── 📁hook
+        ├── useMobile.ts
+    └── 📁lib
+        ├── utils.ts
+    └── 📁motion
+        ├── ChevronLeft.tsx
+        ├── ChevronRight.tsx
+    └── 📁pages
+        ├── Index.tsx
+        ├── NotFound.tsx
+    ├── App.css
+    ├── App.tsx
+    ├── index.css
+    ├── main.tsx
+    └── vite-env.d.ts
 ```
+
 
 ---
 
@@ -126,6 +136,4 @@ If you'd like to reach out, feel free to connect:
 
 > Thank you for checking out **TechTribe Portfolio**!
 
-
-# In Progress 🚀
  ![project banner](https://github.com/Web-Bikash-Agency/TechTribe-Portfolio/blob/main/Screenshot%202025-10-10%20210308.png?raw=true)
