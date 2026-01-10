@@ -139,7 +139,7 @@ export const members = [
     github: "https://github.com/falgune2701",
     instagram: "https://www.instagram.com/mondalbabu_2701/",
     desc: "Frontend is not just code, it's the face of your product",
-    image:"https://res.cloudinary.com/dflelt85r/image/upload/v1759727311/falgune_2_lmdevi.jpg",
+    image:"https://res.cloudinary.com/dflelt85r/image/upload/v1768059811/IMG_20251230_143140_lxfq1k.jpg",
     gender: "male"
   },
   {

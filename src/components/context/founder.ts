@@ -11,6 +11,6 @@ export const founder = [
     name: "Falgune Mondal",
     role: "Founder",
     image:
-      "https://res.cloudinary.com/dflelt85r/image/upload/v1759727311/falgune_2_lmdevi.jpg",
+      "https://res.cloudinary.com/dflelt85r/image/upload/v1768059811/IMG_20251230_143140_lxfq1k.jpg",
   },
 ]
