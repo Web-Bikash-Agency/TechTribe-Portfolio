@@ -23,17 +23,6 @@ export const members = [
   },
   {
     id: 3,
-    name: "Kalyan Manna",
-    domain: "Full Stack Developer",
-    desc: "Both in coding and in life, errors are proof that you are trying",
-    image: "https://res.cloudinary.com/dflelt85r/image/upload/v1759677758/kalyan_lvhu1a.jpg",
-    linkedin: "https://www.linkedin.com/in/kalyan-manna/",
-    github: "https://github.com/Kalyan-github-4",
-    instagram: "https://www.instagram.com/k_spidey_404?igsh=MTU4Mmo2Zmw0NXJ6ZQ==",
-    gender: "male"
-  },
-  {
-    id: 4,
     name: "Riya Bera",
     domain: "Frontend Developer",
     desc: "Be the CEO of your own life",
@@ -44,7 +33,7 @@ export const members = [
     gender: "female"
   },
   {
-    id: 5,
+    id: 4,
     name: "Saptarshi Bisoi",
     domain: "MERN Stack Developer & Graphics Designer",
     desc: "Success is built on consistency, not motivation.",
@@ -55,7 +44,7 @@ export const members = [
     gender: "male"
   },
   {
-    id: 6,
+    id: 5,
     name: "Moumita Maity",
     domain: "Full- Stack Web Developer ",
     desc: "Code with logic, design with purpose",
@@ -66,7 +55,7 @@ export const members = [
     gender: "female"
   },
   {
-    id: 7,
+    id: 6,
     name: "Sathi Satvaya",
     domain: "Web Developer",
     desc: "Dream in code. Build in reality",
@@ -77,7 +66,7 @@ export const members = [
     gender: "female"
   },
   {
-    id: 8,
+    id: 7,
     name: "Anjan Mahata",
     domain: "Cyber Security Enthusiast",
     desc: "Your comfort zone is your enemy.",
@@ -88,7 +77,7 @@ export const members = [
     gender: "male"
   },
   {
-    id: 9,
+    id: 8,
     name: "Sampathirao Gouthami",
     domain: "Full Stack Developer",
     linkedin: "https://www.linkedin.com/in/gouthami-sampathirao-b1b04936a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
@@ -99,7 +88,7 @@ export const members = [
     gender: "female"
   },
   {
-    id: 10,
+    id: 9,
     name: "Anubhav Chowdhury ",
     domain: "Full-Stack Web Developer",
     linkedin: "https://www.linkedin.com/in/anubhav-chowdhury-b7905b339",
@@ -110,7 +99,7 @@ export const members = [
     gender: "male"
   },
   {
-    id: 11,
+    id: 10,
     name: "Satyajit Basanta",
     domain: "Ai & Ml Learner",
     linkedin: "http://linkedin.com/in/satyajit-basanta-3476ba363",
@@ -121,7 +110,7 @@ export const members = [
     gender: "male"
   },
   {
-    id: 12,
+    id: 11,
     name: "Angsuman Das",
     domain: "Cybersecurity Analyst & Pentesting",
     linkedin: "https://www.linkedin.com/in/angsuman-0xcc-8258322b7",
@@ -132,7 +121,7 @@ export const members = [
     gender: "male"
   },
   {
-    id: 13,
+    id: 12,
     name: "Falgune Mondal",
     domain: "Frontend Developer",
     linkedin: "https://www.linkedin.com/in/falgune-mondal-747b63255/",
@@ -143,7 +132,7 @@ export const members = [
     gender: "male"
   },
   {
-    id: 14,
+    id: 13,
     name: "Md Yousuf Mallik",
     domain: "Full stack & Android",
     linkedin: "https://www.linkedin.com/in/yousuf-mallik/",
