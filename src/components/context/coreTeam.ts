@@ -15,19 +15,12 @@ export const coreTeam = [
   },
   {
     id: 3,
-    name: "Kalyan Manna",
-    role: "Tech Lead",
-    image:
-      "https://res.cloudinary.com/dflelt85r/image/upload/v1759677758/kalyan_lvhu1a.jpg",
-  },
-  {
-    id: 4,
     name: "Riya Bera",
     role: "Public Relations Lead",
     image:
       "https://res.cloudinary.com/dflelt85r/image/upload/v1759721395/riya_vkonnc.jpg",
   },{
-    id: 5,
+    id: 4,
     name: "Saptarshi Bisoi",
     role: "Tech Lead",
     image:
